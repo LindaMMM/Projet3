@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" />
+<meta name="viewport"
+	content="width=device-width, initial-scale=1.0,maximum-scale=1.0" />
+<title>Bicomat-Agency</title>
+<link rel="stylesheet" href="../css/bulma.min.css" />
+<link rel="shortcut icon" href="../images/fav_icon.png"
+	type="image/x-icon"/>
+<link rel="stylesheet" href="../css/mnu.css" />
+
+<script defer src="../js/all.js"></script>
+<script src="webjars/jquery/3.1.1/jquery.min.js"></script>
+<script src="../js/mnuAgence.js"></script>
+
+</head>
+<body>
+	<nav class="navbar is-light ">
+		<a class="navbar-item" href="#"> <img
+			src="../images/logo68_68.png" alt="Agency" width="112" height="28">
+		</a>
+		<div class="navbar-brand">
+			<div class="navbar-burger burger"
+				data-target="navbarExampleTransparentExample">
+				<span></span> <span></span> <span></span>
+			</div>
+		</div>
+
+		<div id="navbarExampleTransparentExample" class="navbar-menu">
+			<div class="navbar-start">
+				<a class="navbar-item" th:href="@{/pages/users}"> Compte </a> <a
+					class="navbar-item" href="https://bulma.io/"> Carte & Services </a> <a
+					class="navbar-item" href="https://bulma.io/"> Epargne </a> <a
+					class="navbar-item" href="https://bulma.io/"> Credits </a><a
+					class="navbar-item" href="https://bulma.io/"> Assurances </a>
+				<div class="navbar-item has-dropdown is-hoverable">
+					<a class="navbar-link" href="/documentation/overview/start/">
+						Client </a>
+					<div class="navbar-dropdown">
+						<a class="navbar-item" href="/newtiers"> Créer un Tiers </a> <a
+							class="navbar-item" href="/newconseiller"> Créer un Conseiller
+						</a> <a class="navbar-item" href="/newinterne"> Créer un Interne </a>
+					</div>
+				</div>
+
+				<div class="navbar-end">
+					<div class="navbar-item">
+						<div class="field">
+							<div class="control">
+								<form th:action="@{/logout}" method="post">
+									<input type="submit" value="Deconnexion" />
+								</form>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+	</nav>
+
+
+	<section class="section">
+		<div class="container has-text-centered">
+			<h1 th:inline="text">Bienvenue
+				[[${#httpServletRequest.remoteUser}]]!</h1>
+client!!!!!
+			<p>
+			<p>Vous pouvez accéder sur votre gestion de compte.</p>
+		</div>
+	</section>
+
+	<footer class="footer">
+		<div class="container">
+			<div class="content has-text-centered">
+
+				<p>
+					<a> <img src="../images/logo.png" alt="Logo" width="128"
+						height="24">
+					</a>
+				</p>
+			</div>
+		</div>
+	</footer>
+	<script src="../js/bulma.js"></script>
+
+</body>
+</html>

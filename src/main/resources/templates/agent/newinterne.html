@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html  xmlns:th="http://www.thymeleaf.org"   
+  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head>
+   <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Barre de Navigation avec Bulma CSS</title>
+    <link rel="stylesheet" href="../css/bulma.min.css">
+    <script defer src="../js/all.js"></script>
+</head>
+<body>
+ <section class="hero">
+        <div class="hero-body">
+            <div class="container is-fluid">
+                <div class="column is-three-fifths is-offset-one-fifth">
+                    <h3 class="title has-text-grey">Ajout d'un Interne</h3>
+                   
+                    <div class="box">
+                       <form th:action="@{saveInterne}" method="post">
+                        	<div class="field is-horizontal">
+		  					 	<div class="field-label is-normal">
+									    <label class="label">Nom</label>
+								 </div>
+							 
+							 <div class="field-body">
+							    <div class="field">
+							      <div class="control">
+							        <input class="input" type="text" placeholder="Nom" name="nom">
+		  								<span class="input is-danger" th:errors="${interne.nom}"></span>
+							      </div>
+							    </div>
+							  </div>
+				   			 </div>
+				   			 <div class="field is-horizontal">
+		  					 		<div class="field-label is-normal">
+									    <label class="label">Prénom</label>
+								 	</div>
+							 		<div class="field-body">
+									    <div class="field">
+									      <div class="control">
+									        <input class="input" type="text" placeholder="Prénom" name="prenom">
+		  									<span class="input is-danger" th:errors="${interne.prenom}"></span>
+									      </div>
+									    </div>
+							       </div>
+				   			 </div>
+				   			 	<div class="field is-horizontal">
+		  					 		<div class="field-label is-normal">
+									    <label class="label">@Email</label>
+								 	</div>
+							 		<div class="field-body">
+									    <div class="field">
+									      <div class="control">
+									        <input class="input"  type="email" placeholder="@Email" name="adressmail">
+		  									<span class="input is-danger" th:errors="${interne.adressmail}"></span>
+									      </div>
+									    </div>
+							       </div>
+				   			 </div>
+				   			  	<div class="field is-horizontal">
+		  					 		<div class="field-label is-normal">
+									    <label class="label">Login</label>
+								 	</div>
+							 		<div class="field-body">
+									    <div class="field">
+									      <div class="control">
+									        <input class="input" type="text" placeholder="Login" name="login">
+											<span class="input is-danger" th:errors="${interne.login}"></span>
+									      </div>
+									    </div>
+							       </div>
+				   			 </div>
+				   			 	  	<div class="field is-horizontal">
+		  					 		<div class="field-label is-normal">
+									    <label class="label">Mot de Passe</label>
+									 	</div>
+								 		<div class="field-body">
+										    <div class="field">
+										      <div class="control">
+												<input class="input" type="password" placeholder="Mot de Passe" name="motpass">
+												<span class="input is-danger" th:errors="${interne.motpass}"></span>
+									      </div>
+										    </div>
+								       </div>
+				   				    </div>
+				   			 	  	<div class="field is-horizontal">
+		  					 		<div class="field-label is-normal">
+									    <label class="label">Année Arrivée</label>
+								 	</div>
+							 		<div class="field-body">
+									    <div class="field">
+									      <div class="control">
+											<input class="input" type="text" placeholder="Année arrivée dans la banque" name="anneearrivee">
+											<span class="input is-danger" th:errors="${interne.anneearrivee}"></span>
+									      </div>
+									    </div>
+							       </div>
+				   			 </div>
+				   			 	  	<div class="field is-horizontal">
+		  					 		<div class="field-label is-normal">
+									    <label class="label">Numéro Contrat</label>
+								 	</div>
+							 		<div class="field-body">
+									    <div class="field">
+									      <div class="control">
+											<input class="input" type="text" placeholder="Numéro contrat" name="numcontrat">
+											<span class="input is-danger" th:errors="${interne.numcontrat}"></span>
+									      </div>
+									    </div>
+							       </div>
+				   			 </div>
+				   			 	  	<div class="field is-horizontal">
+		  					 		<div class="field-label is-normal">
+									    <label class="label">Agence</label>
+								 	</div>
+							 		<div class="field-body">
+									    <div class="field">
+									      <div class="control">
+											<input class="input" type="text" placeholder="Nom de l'agence" name="agency">
+											<span class="input is-danger" th:errors="${interne.agency}"></span>
+									      </div>
+									    </div>
+							       </div>
+				   			 </div>
+				   			 <div class="field is-horizontal">
+		  					 		<div class="field-label is-normal">
+									    <label class="label">Portable</label>
+								 	</div>
+							 		<div class="field-body">
+									    <div class="field">
+									      <div class="control">
+											<input class="input" type="tel" placeholder="Numéro de portable" name="numportable">
+											<span class="input is-danger" th:errors="${interne.numportable}"></span>
+									      </div>
+									    </div>
+							       </div>
+				   			 </div>
+				   			<div class="field is-horizontal">
+		  					 		<div class="field-label is-normal">
+									    <label class="label">Conseiller</label>
+								 	</div>
+							 		<div class="field-body">
+								
+					
+										  <select name="conseille">
+										    <option  th:each="e:${conseiller}"
+										    th:text="${e.nomConseil} +'  '+ ${e.prenomConseil}" th:value="${e.idconseil}"></option>
+										  </select>
+										</div>
+							     
+				   			 </div>
+					  			<br>
+					  			<br>
+                             <div class="field is-grouped">
+					  			<div class="control">
+					    		 	<button class="button is-info">Enregistrer</button>
+					  			</div>
+					  			
+					  			 <div class="control">
+					    			<button class="button is-danger">Annuler</button>
+					  			</div>
+							</div>
+                        </form>
+                    </div>
+              
+                </div>
+            </div>
+        </div>
+    </section>
+    <script async type="text/javascript" src="../js/bulma.js"></script>
+
+      
+</body>
+</html>

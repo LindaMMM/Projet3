@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head>
+   <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Gestion des Conseillers</title>
+    <link rel="stylesheet" href="../css/bulma.min.css">
+    <script defer src="../js/all.js"></script>
+</head>
+<body>
+ <section class="hero">
+        <div class="hero-body">
+            <div class="container is-fluid">
+                <div class="column is-three-fifths is-offset-one-fifth">
+                    <h3 class="title has-text-grey">Ajout d'un Conseiller</h3>
+                   
+                    <div class="box">
+                       <form th:action="@{saveConseiller}" method="post">
+                        	<div class="field is-horizontal">
+		  					 	<div class="field-label is-normal">
+									    <label class="label">Nom</label>
+								 </div>
+							 <div class="field-body">
+							    <div class="field">
+							      <div class="control">
+							        <input class="input" type="text" placeholder="Nom" name="nomConseil">
+		  								<span class="input is-danger" th:errors="${conseiller.nomConseil}"></span>
+							      </div>
+							    </div>
+							  </div>
+				   			 </div>
+				   			 <div class="field is-horizontal">
+		  					 		<div class="field-label is-normal">
+									    <label class="label">Prénom</label>
+								 	</div>
+							 		<div class="field-body">
+									    <div class="field">
+									      <div class="control">
+									        <input class="input" type="text" placeholder="Prénom" name="prenomConseil">
+		  									<span class="input is-danger" th:errors="${conseiller.prenomConseil}"></span>
+									      </div>
+									    </div>
+							       </div>
+				   			 </div>
+					  			<br>
+					  			<br>
+                             <div class="field is-grouped">
+					  			<div class="control">
+					    		 	<button class="button is-info">Enregistrer</button>
+					  			</div>
+					  			
+					  			 <div class="control">
+					    			<button class="button is-danger">Annuler</button>
+					  			</div>
+							</div>
+                        </form>
+                    </div>
+              
+                </div>
+            </div>
+        </div>
+    </section>
+    <script async type="text/javascript" src="../js/bulma.js"></script>
+
+      
+</body>
+</html>

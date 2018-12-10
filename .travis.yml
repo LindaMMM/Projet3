@@ -1,0 +1,2 @@
+./mvnw install -DskipTests=true -Dmaven.javadoc.skip=true -B -V
+mvn clean compile

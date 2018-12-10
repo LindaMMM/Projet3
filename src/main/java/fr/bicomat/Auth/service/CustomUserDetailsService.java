@@ -12,6 +12,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import fr.bicomat.Auth.entities.State;
 import fr.bicomat.Auth.entities.UserProfile;
 import fr.bicomat.Auth.entities.User_App;
 
@@ -30,22 +31,31 @@ public class CustomUserDetailsService implements UserDetailsService{
 			System.out.println("User not found");
 			throw new UsernameNotFoundException("Username not found");
 		}
+		
 		if (user.getState().equals("Provisional")) {
 			return new org.springframework.security.core.userdetails.User(user.getSsoId(), "{noop}" + user.getPassword(), 
 					true , true, true, true, getGrantedAuthorities(user));
 
 		}
+		else {
 			return new org.springframework.security.core.userdetails.User(user.getSsoId(), user.getPassword(), 
 					user.getState().equals("Active") , true, true, true, getGrantedAuthorities(user));
+		}
 	}
 
 	
 	private List<GrantedAuthority> getGrantedAuthorities(User_App user){
 		List<GrantedAuthority> authorities = new ArrayList<GrantedAuthority>();
-		
+		if (user.getState().equals(State.ACTIVE.getState()))
+		{
 		for(UserProfile userProfile : user.getUserProfiles()){
 			System.out.println("UserProfile : "+userProfile);
 			authorities.add(new SimpleGrantedAuthority("ROLE_"+userProfile.getType()));
+		}
+		}
+		else
+		{
+			authorities.add(new SimpleGrantedAuthority("ROLE_PROVISIONNAL"));
 		}
 		System.out.print("authorities :"+authorities);
 		return authorities;

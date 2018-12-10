@@ -44,8 +44,10 @@ public class CustomSuccessHandler extends SimpleUrlAuthenticationSuccessHandler{
 		for (GrantedAuthority a : authorities) {
 			roles.add(a.getAuthority());
 		}
-
-		if (isAdmin(roles)) {
+		if (isProvisonal(roles)) {
+			url = "/changedPassword";
+		}
+		else if (isAdmin(roles)) {
 			url = "/admin/index";
 		} else if (isAgent(roles)) {
 			url = "/agent/index";
@@ -81,6 +83,13 @@ public class CustomSuccessHandler extends SimpleUrlAuthenticationSuccessHandler{
 
 	private boolean isAgent(List<String> roles) {
 		if (roles.contains("ROLE_AGENT")) {
+			return true;
+		}
+		return false;
+	}
+	
+	private boolean isProvisonal(List<String> roles) {
+		if (roles.contains("ROLE_PROVISIONAL")) {
 			return true;
 		}
 		return false;

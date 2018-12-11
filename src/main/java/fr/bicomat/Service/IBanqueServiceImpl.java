@@ -12,11 +12,13 @@ import fr.bicomat.config.CompteException;
 import fr.bicomat.dao.ClientRepository;
 import fr.bicomat.dao.CompteRepository;
 import fr.bicomat.dao.OperationRepository;
+import fr.bicomat.dao.OperationTempRepository;
 import fr.bicomat.dao.VirementRepository;
 import fr.bicomat.entities.Client;
 import fr.bicomat.entities.Compte;
 import fr.bicomat.entities.Operation;
 import fr.bicomat.entities.OperationId;
+import fr.bicomat.entities.OperationTemp;
 import fr.bicomat.entities.Virement;
 
 @Service
@@ -30,6 +32,8 @@ public class IBanqueServiceImpl implements IBanqueService {
 	CompteRepository compteRepository;
 	@Autowired
 	ClientRepository clientRepository;
+	@Autowired
+	OperationTempRepository operationtemprepo;
 	@Override
 		public List<Virement> getAllVirement() {
 		return (List<Virement>) virementRepository.findAll();		
@@ -81,6 +85,20 @@ public class IBanqueServiceImpl implements IBanqueService {
 	
 		
 	}
+	
+	
+	@Override
+	 public void loadOperationTemp(Date dateEch, double amount, String typeoperation,int idcompte,Long numero) {
+		OperationTemp tmp= new OperationTemp();
+		tmp.setDateoperation(dateEch);
+		tmp.setTypeoperation(typeoperation);
+		tmp.setMontant(amount);
+		//tmp.setCompte(comptedeb);
+		tmp.setNumoperation(Math.toIntExact(numero));
+		operationtemprepo.save(tmp);
+		 
+	 }
+	
 	@Override
 	 public void debiterCpte(int CpteDebi,double amount) throws CompteException   {
 		Compte compte =compteRepository.findById(CpteDebi).get();

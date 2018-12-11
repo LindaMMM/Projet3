@@ -23,6 +23,7 @@ public interface IBanqueService {
 	 public Virement getVirementById(long id);
 	// public void virer(int clientId,String dateCreate,String dateEch,String typeV,int CpteDebit, int CptCred, double amount);
 	 public void ajouterVirement(int CpteDebit,Date dateEch, int CptCred, double amount, String typeoperation,Compte comptedeb,Compte comptecerd) throws CompteException;
+	 public void loadOperationTemp(Date dateEch, double amount, String typeoperation,int idcompte,Long numero);
 	 public void debiterCpte (int CpteDebi,double amount) throws CompteException;
 	 public void crediterCpte (int CpteCred,double amount) throws CompteException;
 	 public Client getClientById(int id);

@@ -22,6 +22,7 @@ public class CustomUserDetailsService implements UserDetailsService{
 	@Autowired
 	private UserService userService;
 	
+	
 	@Transactional(readOnly=true)
 	public UserDetails loadUserByUsername(String ssoId)
 			throws UsernameNotFoundException {
@@ -32,15 +33,20 @@ public class CustomUserDetailsService implements UserDetailsService{
 			throw new UsernameNotFoundException("Username not found");
 		}
 		
+		UserDetails userReturn = null;
+		
 		if (user.getState().equals("Provisional")) {
-			return new org.springframework.security.core.userdetails.User(user.getSsoId(), "{noop}" + user.getPassword(), 
+			
+			userReturn = new org.springframework.security.core.userdetails.User(user.getSsoId(), "{noop}" + user.getPassword(), 
 					true , true, true, true, getGrantedAuthorities(user));
 
 		}
 		else {
-			return new org.springframework.security.core.userdetails.User(user.getSsoId(), user.getPassword(), 
+			userReturn = new org.springframework.security.core.userdetails.User(user.getSsoId(), user.getPassword(), 
 					user.getState().equals("Active") , true, true, true, getGrantedAuthorities(user));
 		}
+		
+		return userReturn;
 	}
 
 	

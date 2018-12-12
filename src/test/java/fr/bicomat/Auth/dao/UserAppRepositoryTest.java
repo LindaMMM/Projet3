@@ -6,6 +6,8 @@ import org.junit.Test;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 
+import javax.transaction.Transactional;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,6 +21,7 @@ import fr.bicomat.config.WebSecurityConfig;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
+@Transactional
 public class UserAppRepositoryTest {
 
 	@Autowired

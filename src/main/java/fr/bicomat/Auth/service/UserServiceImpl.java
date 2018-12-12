@@ -3,9 +3,12 @@ package fr.bicomat.Auth.service;
 import java.util.HashSet;
 import java.util.Optional;
 
+import org.apache.commons.lang.RandomStringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import fr.bicomat.Auth.entities.State;
 import fr.bicomat.Auth.entities.UserProfile;
 import fr.bicomat.Auth.entities.UserProfileType;
 import fr.bicomat.Auth.entities.User_App;
@@ -26,6 +29,9 @@ public class UserServiceImpl implements UserService {
 		@Autowired
 		private UserQuestionRepository userQuestionRepository;
 		
+		@Autowired
+		private EmailService serviceEmail;
+		
 		@Override
 		public Iterable<User_App> listAllUsers() {
 			return userRepository.findAll();
@@ -38,7 +44,15 @@ public class UserServiceImpl implements UserService {
 
 		@Override
 		public User_App saveUser(User_App user) {
-			return userRepository.save(user);
+			boolean sendEmail = user.getId()==0;
+			
+			User_App usrTemp = userRepository.save(user);
+			
+			if(sendEmail){
+				serviceEmail.sendConfirmationEmail(user);
+				serviceEmail.sendNewPassWordEmail(user);
+			}
+			return usrTemp;
 		}
 
 		@Override
@@ -52,5 +66,53 @@ public class UserServiceImpl implements UserService {
 			System.out.println(ssoId);
 			
 			return userRepository.findBySsoId(ssoId);
+		}
+
+		@Override
+		public User_App razTryPwd(User_App user) {
+			user.setNbTry(0);
+			return userRepository.save(user);
+		}
+
+		@Override
+		public User_App resetPwd(User_App user) {
+			user.setNbTry(0);
+			user.setPassword(generadNewPassword());
+			user.setState(State.PROVISIONAL.getState());
+			serviceEmail.sendNewPassWordEmail(user);
+			return userRepository.save(user);
+		}
+
+		@Override
+		public User_App updateNewTry(User_App user) {
+			user.setNbTry(user.getNbTry()+1);
+			if (user.getNbTry()>3)
+			{
+				user.setState(State.LOCKED.getState());
+			}
+			return userRepository.save(user);
+		}
+
+		@Override
+		public User_App changePwd(User_App user) {
+			user.setState(State.ACTIVE.getState());
+			user.setNbTry(0);
+			user.setPassword(new BCryptPasswordEncoder().encode(user.getPassword()));
+
+			return userRepository.save(user);
+		}
+		
+		/**
+		 * Effectue la génération d'un nouveau mot de passe. 
+		 * @return
+		 */
+		private String generadNewPassword(){
+			  return RandomStringUtils.randomAlphabetic(10); 
+		}
+
+		@Override
+		public User_App deleteCompte(User_App user) {
+			user.setState(State.DELETED.getState());
+			return userRepository.save(user);
 		}
 	}

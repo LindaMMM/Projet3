@@ -15,26 +15,19 @@ public class OperationTemp implements Serializable {
 	@Id
 	@GeneratedValue(strategy = IDENTITY)
 	private Long idop;
-	private int idcompte;
+	private int idcomptedeb;
+	private int idcomptecred;
 	private int numoperation;
 	private Date dateoperation;
 	private Date dateechance;
 	private double montant;
 	private String typeoperation;
+	private String status;
 	public OperationTemp() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-	public OperationTemp(int idcompte, int numoperation, Date dateoperation, Date dateechance, double montant,
-			String typeoperation) {
-		super();
-		this.idcompte = idcompte;
-		this.numoperation = numoperation;
-		this.dateoperation = dateoperation;
-		this.dateechance = dateechance;
-		this.montant = montant;
-		this.typeoperation = typeoperation;
-	}
+
 	public Long getIdop() {
 		return idop;
 	}
@@ -72,12 +65,45 @@ public class OperationTemp implements Serializable {
 	public void setTypeoperation(String typeoperation) {
 		this.typeoperation = typeoperation;
 	}
-	public int getIdcompte() {
-		return idcompte;
+
+	public OperationTemp(int idcomptedeb, int idcomptecred, int numoperation, Date dateoperation, Date dateechance,
+			double montant, String typeoperation,String status) {
+		super();
+		this.idcomptedeb = idcomptedeb;
+		this.idcomptecred = idcomptecred;
+		this.numoperation = numoperation;
+		this.dateoperation = dateoperation;
+		this.dateechance = dateechance;
+		this.montant = montant;
+		this.typeoperation = typeoperation;
+		this.status=status;
+		
 	}
-	public void setIdcompte(int idcompte) {
-		this.idcompte = idcompte;
+
+	public int getIdcomptedeb() {
+		return idcomptedeb;
 	}
+
+	public void setIdcomptedeb(int idcomptedeb) {
+		this.idcomptedeb = idcomptedeb;
+	}
+
+	public int getIdcomptecred() {
+		return idcomptecred;
+	}
+
+	public void setIdcomptecred(int idcomptecred) {
+		this.idcomptecred = idcomptecred;
+	}
+
+	public String getStatus() {
+		return status;
+	}
+
+	public void setStatus(String status) {
+		this.status = status;
+	}
+
 
 		
 }

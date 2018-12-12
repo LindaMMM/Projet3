@@ -6,6 +6,8 @@ import java.util.List;
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Service;
 
 import fr.bicomat.config.CompteException;
@@ -22,7 +24,7 @@ import fr.bicomat.entities.OperationTemp;
 import fr.bicomat.entities.Virement;
 
 @Service
-@Transactional
+@Transactional(rollbackOn = {Exception.class})
 public class IBanqueServiceImpl implements IBanqueService {
 	@Autowired
 	VirementRepository virementRepository;
@@ -35,6 +37,12 @@ public class IBanqueServiceImpl implements IBanqueService {
 	@Autowired
 	OperationTempRepository operationtemprepo;
 	@Override
+	 public List<OperationTemp> getOperationEchue(Date echeance){
+		 return (List<OperationTemp>) operationtemprepo.findByDateechance(echeance);
+	 }
+	
+	@Override
+	
 		public List<Virement> getAllVirement() {
 		return (List<Virement>) virementRepository.findAll();		
 	}
@@ -43,7 +51,17 @@ public class IBanqueServiceImpl implements IBanqueService {
 		virementRepository.deleteById(id);
 		
 	}
-	
+	@Override
+	public OperationTemp getOperationTempById(Long id) {
+		return operationtemprepo.findById(Math.toIntExact(id)).get();
+	}
+	@Override
+	 public void updateOpTemp(Long id,String statut) {
+		OperationTemp op= getOperationTempById(id);
+		op.setStatus(statut);
+		operationtemprepo.save(op);
+		 
+	 }
 	@Override
 	public Virement getVirementById(long id) {
 		return virementRepository.findById(id).get();
@@ -61,7 +79,7 @@ public class IBanqueServiceImpl implements IBanqueService {
 //	 }
 	@Override
 	
-	 public void ajouterVirement(int CpteDebit,Date dateEch, int CptCred, double amount,String typeoperation,Compte comptedeb,Compte comptecerd) throws CompteException {
+	 public void ajouterVirement(int CpteDebit,Date dateEch, int CptCred, double amount,String typeoperation,Compte comptedeb,Compte comptecerd,Long optemID) throws CompteException {
 		//virementRepository.save(virement);
 		Operation operationsDeb= new Operation();
 		OperationId operationIdDeb=new OperationId();
@@ -82,18 +100,21 @@ public class IBanqueServiceImpl implements IBanqueService {
 		operationRepository.save(operationsCred);
 		
 		crediterCpte(CptCred, amount);
+		updateOpTemp(optemID, "Success");
 	
 		
 	}
 	
 	
 	@Override
-	 public void loadOperationTemp(Date dateEch, double amount, String typeoperation,int idcompte,Long numero) {
+	 public void loadOperationTemp(Date dateEch, double amount, String typeoperation, int CpteDebit,Long numero,int CptCred) {
 		OperationTemp tmp= new OperationTemp();
 		tmp.setDateoperation(dateEch);
+		tmp.setDateechance(dateEch);
 		tmp.setTypeoperation(typeoperation);
 		tmp.setMontant(amount);
-		//tmp.setCompte(comptedeb);
+		tmp.setIdcomptedeb(CpteDebit);
+		tmp.setIdcomptecred(CptCred);
 		tmp.setNumoperation(Math.toIntExact(numero));
 		operationtemprepo.save(tmp);
 		 

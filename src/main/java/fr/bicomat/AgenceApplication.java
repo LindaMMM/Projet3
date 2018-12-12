@@ -1,14 +1,22 @@
 package fr.bicomat;
 
 
+import java.text.SimpleDateFormat;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
+import org.springframework.scheduling.annotation.EnableScheduling;
+
+import fr.bicomat.Service.IBanqueService;
+import fr.bicomat.entities.OperationTemp;
 
 @EnableJpaRepositories(basePackages = {"fr.bicomat.dao","fr.bicomat.Auth.dao"})
 @SpringBootApplication
+@EnableScheduling
 public class AgenceApplication {
 
 private static final Logger log = LoggerFactory.getLogger(AgenceApplication.class);
@@ -21,7 +29,14 @@ private static final Logger log = LoggerFactory.getLogger(AgenceApplication.clas
 
 	/*@Override
 	public void run(String... args) throws Exception {
-		
+		for(OperationTemp op : ibanqueService.getOperationEchue(new SimpleDateFormat("yyyy-MM-dd HH:mm").parse("2018-12-15 10:00")) ) {
+System.out.println("Id: " +  op.getIdop());
+System.out.println("Name: " + op.getNumoperation());
+System.out.println("Price: " + op.getDateechance());
+System.out.println("Quantity: " + op.getDateechance());
+
+System.out.println("================================");
+}
 				
 				//====================New Conseiller====================================
 				
@@ -64,5 +79,5 @@ private static final Logger log = LoggerFactory.getLogger(AgenceApplication.clas
       																				
 	}*/
 	
-	
+
 }

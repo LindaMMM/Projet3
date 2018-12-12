@@ -8,6 +8,7 @@ import fr.bicomat.config.CompteException;
 import fr.bicomat.entities.Client;
 import fr.bicomat.entities.Compte;
 import fr.bicomat.entities.Operation;
+import fr.bicomat.entities.OperationTemp;
 import fr.bicomat.entities.Virement;
 
 public interface IBanqueService {
@@ -22,11 +23,14 @@ public interface IBanqueService {
 	 public void deleteVirement(long id);
 	 public Virement getVirementById(long id);
 	// public void virer(int clientId,String dateCreate,String dateEch,String typeV,int CpteDebit, int CptCred, double amount);
-	 public void ajouterVirement(int CpteDebit,Date dateEch, int CptCred, double amount, String typeoperation,Compte comptedeb,Compte comptecerd) throws CompteException;
-	 public void loadOperationTemp(Date dateEch, double amount, String typeoperation,int idcompte,Long numero);
+	 public void ajouterVirement(int CpteDebit,Date dateEch, int CptCred, double amount, String typeoperation,Compte comptedeb,Compte comptecerd,Long optemID) throws CompteException;
+	 public void loadOperationTemp(Date dateEch, double amount, String typeoperation, int CpteDebit,Long numero,int CptCred);
 	 public void debiterCpte (int CpteDebi,double amount) throws CompteException;
 	 public void crediterCpte (int CpteCred,double amount) throws CompteException;
 	 public Client getClientById(int id);
 	 public  Compte getCompteById(int id);
+	 public List<OperationTemp> getOperationEchue(Date echeance);
+	 public OperationTemp getOperationTempById(Long id);
+	 public void updateOpTemp(Long id,String statut);
 	 
 }

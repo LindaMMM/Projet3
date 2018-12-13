@@ -36,15 +36,22 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	@Override
     protected void configure(HttpSecurity http) throws Exception {
 		
+		
+		
 		http.authorizeRequests()
-		.antMatchers("/images/**","/js/**", "/css/**").permitAll()
+		
+		.antMatchers("/images/**","/webjars/**","/js/**", "/css/**", "/resetPassword","/api/**").permitAll()
+		.and()
+		.authorizeRequests()
 		.anyRequest().fullyAuthenticated()
 		.and()
 		.formLogin().loginPage("/login").permitAll()
 		.and().formLogin().loginPage("/login").successHandler(customSuccessHandler)
 	  	.usernameParameter("ssoId").passwordParameter("password")
-	  	.and().csrf()
 	  	.and().exceptionHandling().accessDeniedPage("/AccessDenied");
+		http.csrf().disable();
+	  	// .and().csrf().disable();
+	  	
 
 		/* http.authorizeRequests()
 		 	.antMatchers("/images/**","/js/**", "/css/**").permitAll()

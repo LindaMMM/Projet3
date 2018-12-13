@@ -11,7 +11,7 @@ import fr.bicomat.Auth.entities.User_App;
  * @author linda
  *
  */
-public interface UserAppRepository extends JpaRepository<User_App, Long> {
+public interface UserAppRepository extends JpaRepository<User_App, Integer> {
 
 	/**
 	 * Obtient la liste des users à partir de son nom de famille.
@@ -26,5 +26,12 @@ public interface UserAppRepository extends JpaRepository<User_App, Long> {
 	 * @return un utilisateur.
 	 */
     User_App findBySsoId(String ssoId);
+    
+    /**
+	 * Obtient l'utilisateur à partir de son email.
+	 * @param email email de l'utilisalisateur.
+	 * @return un utilisateur.
+	 */
+   User_App findByEmail(String email);
     
 }

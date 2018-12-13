@@ -46,7 +46,7 @@ public class UserAppRepositoryTest {
 		user.setEmail("Name");
 		user.setPassword("Name");
 		user.setSsoId("lo");
-    	user.setId(2L);
+    	user.setId(2);
 
     	userRepository.save(user);
     	
@@ -56,7 +56,7 @@ public class UserAppRepositoryTest {
     	user2.setEmail("Name@mm");
     	user2.setPassword("mmmm");
     	user2.setSsoId("po");
-    	user2.setId(1L);
+    	user2.setId(1);
 
     	// userRepository.deleteAll();
     	userRepository.save(user);

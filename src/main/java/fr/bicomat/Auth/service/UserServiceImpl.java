@@ -1,6 +1,7 @@
 package fr.bicomat.Auth.service;
 
 import java.util.HashSet;
+import java.util.List;
 import java.util.Optional;
 
 import org.apache.commons.lang.RandomStringUtils;
@@ -11,7 +12,9 @@ import org.springframework.stereotype.Service;
 import fr.bicomat.Auth.entities.State;
 import fr.bicomat.Auth.entities.UserProfile;
 import fr.bicomat.Auth.entities.UserProfileType;
+import fr.bicomat.Auth.entities.UserQuestion;
 import fr.bicomat.Auth.entities.User_App;
+import fr.bicomat.Auth.entities.dtoChangedPassword;
 import fr.bicomat.Auth.dao.UserAppRepository;
 import fr.bicomat.Auth.dao.UserProfileRepository;
 import fr.bicomat.Auth.dao.UserQuestionRepository;
@@ -38,7 +41,7 @@ public class UserServiceImpl implements UserService {
 		}
 
 		@Override
-		public User_App  getUserById(Long id) {
+		public User_App  getUserById(Integer id) {
 			return userRepository.findById(id).get();
 		}
 
@@ -56,12 +59,12 @@ public class UserServiceImpl implements UserService {
 		}
 
 		@Override
-		public void deleteUser(Long id) {
+		public void deleteUser(Integer id) {
 			userRepository.deleteById(id);
 		}
 
 		@Override
-		public User_App findBySso(String ssoId) {
+		public User_App getUserByssoId(String ssoId) {
 			System.out.println("find ssoid " + ssoId);
 			System.out.println(ssoId);
 			
@@ -94,11 +97,13 @@ public class UserServiceImpl implements UserService {
 		}
 
 		@Override
-		public User_App changePwd(User_App user) {
+		public User_App changePwd(dtoChangedPassword dto) {
+			User_App user = userRepository.getOne(dto.getIduser());
+			user.setAnswer(dto.getAnswer());
 			user.setState(State.ACTIVE.getState());
 			user.setNbTry(0);
-			user.setPassword(new BCryptPasswordEncoder().encode(user.getPassword()));
-
+			user.setPassword(new BCryptPasswordEncoder().encode(dto.getPassword()));
+			user.setUserQuestion(userQuestionRepository.getOne(dto.getIdquestion()));
 			return userRepository.save(user);
 		}
 		
@@ -114,5 +119,22 @@ public class UserServiceImpl implements UserService {
 		public User_App deleteCompte(User_App user) {
 			user.setState(State.DELETED.getState());
 			return userRepository.save(user);
+		}
+
+		@Override
+		public List<UserQuestion> getAllQuestion() {
+			return userQuestionRepository.findAll();
+		}
+
+		@Override
+		public User_App getUserByEmail(String email) {
+			return userRepository.findByEmail(email);
+		}
+
+		@Override
+		public boolean resetPwd(String ssoId, String numcarte, String reponse) {
+			
+			
+			return false;
 		}
 	}

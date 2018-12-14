@@ -8,6 +8,7 @@ public class MvcConfig implements WebMvcConfigurer {
 
 	public void addViewControllers(ViewControllerRegistry registry) {
       
+		 registry.addViewController("/admin/index").setViewName("admin/index");
 		registry.addViewController("/admin/users").setViewName("admin/users");
         registry.addViewController("/admin/userform").setViewName("admin/userform");
         registry.addViewController("/admin/usershow").setViewName("admin/usershow");
@@ -16,8 +17,6 @@ public class MvcConfig implements WebMvcConfigurer {
         registry.addViewController("/accessDenied").setViewName("accessDenied");
         registry.addViewController("/changedpassword").setViewName("changedpassword");
         registry.addViewController("/resetPassword").setViewName("resetPassword");
-        
-        registry.addViewController("/admin/index").setViewName("admin/index");
         
         registry.addViewController("/agent/index").setViewName("agent/index");
         registry.addViewController("/agent/newtiers").setViewName("agent/newtiers");

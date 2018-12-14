@@ -4,10 +4,11 @@
 $(document).ready(function() {
 	$("#userData").hide();
 	$user = {};
-
+	$nbtry = 0;
 	function validRecherche()
 	{ 
 		return !_.isEmpty($('#loginSearch').val());
+		
 	}
 	
 	/**
@@ -49,6 +50,15 @@ $(document).ready(function() {
 					}
 					else
 					{
+						$nbtry = $nbtry + 1; 
+						if ($nbtry == 3){
+							swal(
+									'Impossible',
+									'Votre demande ne peut pas être traité, veuillez contacter votre conseillier.',
+									'error'
+							)
+							document.location.href="login"
+						}
 						swal(
 								'Oops...',
 								message,
@@ -72,22 +82,23 @@ $(document).ready(function() {
 	 */
 	$("#SendPwd").on('click',function(e){
 		if (validRecherche()){
+			
 			var code = 0;
 			var message = "";
-			var params={response : $("#reponse").val(),
-						numcarte : $("#numCarte").val(),
+			var params={answer : $("#reponse").val(),
+						numCard : $("#numCarte").val(),
 						ssoId : $user.user.ssoId }
 			
 			$.ajax({
-				type : "POST",
 				url :"/api/users/resetPwd",
+				type : "POST",
+				contentType : "application/json",
+				accept: 'text/plain',
 				dataType: "JSON",
 				data: JSON.stringify(params),
 				success: function(result){
-					$user = result;
 					code = result.code;
-					message = result.messsage;
-								
+					message = result.messsage;					
 				},
 				error : function(e) {
 					code = -1;
@@ -95,8 +106,13 @@ $(document).ready(function() {
 				},
 				complete: function(){
 					if (code==1){
-						$("#question").text($user.user.question);
-						$("#userData").show();
+						swal(
+								'Information',
+								message,
+								'success'
+						)
+						document.location.href="login"
+						
 					}
 					else
 					{

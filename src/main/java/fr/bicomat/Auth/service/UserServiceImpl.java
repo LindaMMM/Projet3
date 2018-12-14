@@ -15,6 +15,7 @@ import fr.bicomat.Auth.entities.UserProfileType;
 import fr.bicomat.Auth.entities.UserQuestion;
 import fr.bicomat.Auth.entities.User_App;
 import fr.bicomat.Auth.entities.dtoChangedPassword;
+import fr.bicomat.Service.ClientService;
 import fr.bicomat.Auth.dao.UserAppRepository;
 import fr.bicomat.Auth.dao.UserProfileRepository;
 import fr.bicomat.Auth.dao.UserQuestionRepository;
@@ -34,6 +35,9 @@ public class UserServiceImpl implements UserService {
 		
 		@Autowired
 		private EmailService serviceEmail;
+		
+		@Autowired
+		private ClientService serviceClient;
 		
 		@Override
 		public Iterable<User_App> listAllUsers() {
@@ -133,8 +137,25 @@ public class UserServiceImpl implements UserService {
 
 		@Override
 		public boolean resetPwd(String ssoId, String numcarte, String reponse) {
+			User_App user = userRepository.findBySsoId(ssoId);
 			
+			boolean result = user.getAnswer().equals(reponse);
+			if (result)
+			{
+				UserProfile uprofil =  userProfilRepository.findByType( UserProfileType.CLIENT.getUserProfileType());
+				if (user.getUserProfiles().contains(uprofil))
+				{
+					result = serviceClient.checkClient(user.getIdClient(), numcarte);
+				}
+			}
 			
+			if (result)
+			{
+				// Génération d'un nouveau mot de passe.
+				resetPwd(user);
+				return true;
+			}
+		
 			return false;
 		}
 	}

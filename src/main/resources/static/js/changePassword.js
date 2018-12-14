@@ -109,7 +109,7 @@ $(document).ready(function() {
 		event.preventDefault();
 		var user = {
 				iduser : $("#iduser").val(),
-    			idquestion :   $("#ddlQuestion :selected").val(),
+    			idquestion :   $("#ddlQuestion :selected").data().id,
     			password : $("#password").val(),
     			answer : $("#answer").val()
     	}
@@ -122,11 +122,19 @@ $(document).ready(function() {
 			data : JSON.stringify(user),
 			dataType: 'text',
 			success : function(result) {
-				alert("Le nouveau de mot de passe est enregistré.")
+				swal(
+						'Information',
+						'Le nouveau de mot de passe est enregistré.',
+						'sucess'
+				)
 				document.location.href="login"
 				},
 			error : function(e) {
-				alert("Error!")
+				swal(
+						'Oops...',
+						"L'enregistrement de votre mot de passe n'a pas été pris en compte.",
+						'error'
+				)
 				console.log("ERROR: ", e);
 			}
 		});

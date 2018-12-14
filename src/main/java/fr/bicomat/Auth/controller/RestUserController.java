@@ -18,6 +18,7 @@ import fr.bicomat.Utils;
 import fr.bicomat.Auth.entities.UserQuestion;
 import fr.bicomat.Auth.entities.User_App;
 import fr.bicomat.Auth.entities.dtoChangedPassword;
+import fr.bicomat.Auth.entities.dtoResetPassword;
 import fr.bicomat.Auth.service.UserService;
 
 @RestController
@@ -69,11 +70,9 @@ public class RestUserController {
 		}
 	}
 	
-	@RequestMapping(value="/resetPwd/{response}/{numcarte}/{ssoId}/", method = RequestMethod.POST)
-	public @ResponseBody String resetPwd(@RequestParam(value = "response") String reponse,@RequestParam(value = "numcarte") String numcarte,@RequestParam(value = "ssoId") String ssoId) throws JSONException{
-		User_App userRes = null;
-		userRes = userService.getUserByssoId(ssoId);
-		if (userService.resetPwd(ssoId,numcarte,reponse)) {
+	@PostMapping(value="/resetPwd")
+	public String setResetPwd(@RequestBody dtoResetPassword response) throws JSONException{
+		if (userService.resetPwd(response.getSsoId(),response.getNumCard(),response.getAnswer())) {
 			String jsonString = new JSONObject()
 	                  .put("code", "1")
 	                  .put("message", "Utilisateur trouvé").toString();

@@ -14,60 +14,7 @@
 </head>
  
 <body>
-   <nav class="navbar is-light ">
-        <div class="navbar-brand">
-            <div class="navbar-burger burger" data-target="navbarExampleTransparentExample">
-                <span></span>
-                <span></span>
-                <span></span>
-            </div>
-        </div>
 
-        <div id="navbarExampleTransparentExample" class="navbar-menu">
-            <div class="navbar-start">
-                <a class="navbar-item"th:href="@{/pages/users}">
-                    les Users
-                </a>
-                <a class="navbar-item" href="https://bulma.io/">
-                    Band
-                </a>
-                <a class="navbar-item" href="https://bulma.io/">
-                    Tour
-                </a>
-                <a class="navbar-item" href="https://bulma.io/">
-                    Contact
-                </a>
-                <div class="navbar-item has-dropdown is-hoverable">
-                    <a class="navbar-link" href="/documentation/overview/start/">
-                        Client
-                    </a>
-                     <div class="navbar-dropdown">
-			          <a class="navbar-item"  href="newtiers">
-			            Créer un Tiers
-			          </a>
-			          
-			          <a class="navbar-item"  href="newconseiller">
-			            Créer un Conseiller
-			          </a>
-			           <a class="navbar-item"  href="newinterne">
-			            Créer un Interne
-			          </a>
-                </div>
-            </div>
-
-            <div class="navbar-end">
-                <div class="navbar-item">
-                    <div class="field">
-                        <div class="control">
-                            <form th:action="@{/logout}" method="post">
-		<input type="submit" value="Deconnexion" />
-	</form>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </nav>
 <h1> Les users</h1>
 <td><a th:href="${'/user/new/'}">Nouvel Utilisateur</a></td>
 <div class="container">
@@ -86,14 +33,14 @@
 					<th>Delete</th>
 				</tr>
 				<tr th:each="user : ${users}">
-					<td th:text="${user.id}"><a href="/user/${user.id}">Id</a></td>
+					<td th:text="${user.id}"><a href="/admin/user/${user.id}">Id</a></td>
 					<td th:text="${user.firstName}"></td>
                         <td th:text="${user.lastName}"></td>
                         <td th:text="${user.email}"></td>
                         <td th:text="${user.ssoId}"></td>
-					<td><a th:href="${'/user/' + user.id}">View</a></td>
-					<td><a th:href="${'/user/edit/' + user.id}">Edit</a></td>
-					<td><a th:href="${'/user/delete/' + user.id}">Delete</a></td>
+					<td><a th:href="${'/admin/user/' + user.id}">View</a></td>
+					<td><a th:href="${'/admin/user/edit/' + user.id}">Edit</a></td>
+					<td><a th:href="${'/admin/user/delete/' + user.id}">Delete</a></td>
 				</tr>
 			</table>
 		</div>

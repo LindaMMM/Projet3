@@ -190,7 +190,7 @@ public class User_App implements java.io.Serializable {
 	
 	@Column(name = "answer", nullable = true, length = 30)
 	public String getAnswer() {
-		return this.email;
+		return this.answer;
 	}
 
 	public void setAnswer(String answer) {

@@ -92,46 +92,51 @@ public class UserController {
 		return "resetPassword";
 	}
 	
-   
+	@RequestMapping(value = "/agent/gestCompte", method = RequestMethod.GET)
+	public String getGestCompteAgent(ModelMap model) {
+		model.addAttribute("user", getPrincipal());
+		return "agent/searchClient";
+	}
+
 	
 	/**
 	 * 
 	 * @param model
 	 * @return
 	 */
-	@RequestMapping(value = "/pages/users", method = RequestMethod.GET)
+	@RequestMapping(value = "/admin/users", method = RequestMethod.GET)
 	public String list(Model model) {
 		model.addAttribute("users", userService.listAllUsers());
-		return "pages/users";
+		return "admin/users";
 	}
 
-	@RequestMapping(value = "/pages/user/{id}", method = RequestMethod.GET)
+	@RequestMapping(value = "/admin/user/{id}", method = RequestMethod.GET)
 	public String showUser(@PathVariable Integer id, Model model) {
 		model.addAttribute("user", userService.getUserById(id));
-		return "pages/usershow";
+		return "admin/usershow";
 	}
 
-	@RequestMapping(value = "/pages/user/edit/{id}", method = RequestMethod.GET)
+	@RequestMapping(value = "/admin/user/edit/{id}", method = RequestMethod.GET)
 	public String edit(@PathVariable Integer id, Model model) {
 		model.addAttribute("user", userService.getUserById(id));
-		return "pages/userform";
+		return "admin/userform";
 	}
 
-	@RequestMapping(value = "/user/new", method = RequestMethod.GET)
+	@RequestMapping(value = "/admin/new", method = RequestMethod.GET)
 	public String newUser(Model model) {
 		model.addAttribute("user", new User_App());
-		return "pages/userform";
+		return "admin/userform";
 	}
 
-	@RequestMapping(value = "/user", method = RequestMethod.POST)
+	@RequestMapping(value = "/admin", method = RequestMethod.POST)
 	public String saveProduct(User_App user) {
 		userService.saveUser(user);
-		return "redirect:/pages/user/" + user.getId();
+		return "redirect:/admin/user/" + user.getId();
 	}
 
-	@RequestMapping(value = "/user/delete/{id}", method = RequestMethod.GET)
+	@RequestMapping(value = "/admin/delete/{id}", method = RequestMethod.GET)
 	public String delete(@PathVariable Integer id) {
 		userService.deleteUser(id);
-		return "redirect:/pages/users";
+		return "redirect:/admin/users";
 	}
 }

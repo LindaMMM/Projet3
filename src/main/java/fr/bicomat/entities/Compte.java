@@ -27,10 +27,11 @@ public abstract class Compte implements java.io.Serializable {
 
 	private Integer idcompte;
 	private Client client;
-	private InfoCompte infoCompte;
+	
 	private int numecompte;
 	private double solde;
 	private String typeCompte;
+	private InfoCompte infoCompte;
 	
 	private Set<Operation> operations = new HashSet<Operation>(0);
 	private Set<Virement> virementsForCompteCrediteur = new HashSet<Virement>(0);

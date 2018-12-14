@@ -48,7 +48,7 @@ public class RestUserController {
 			userRes = userService.getUserByEmail(login);
 		}
 		userRes = userService.getUserByssoId(login);
-		if (userRes.getId()>0)
+		if (userRes.getId()>0 && userRes.getUserQuestion() == null)
 		{
 			String jsonString = new JSONObject()
 	                  .put("code", "1")

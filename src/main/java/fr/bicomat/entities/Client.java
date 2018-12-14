@@ -183,7 +183,7 @@ public class Client implements java.io.Serializable {
 	}
 
 	@ManyToMany(fetch = FetchType.LAZY)
-	@JoinTable(name = "banque_client", catalog = "m_db", joinColumns = {
+	@JoinTable(name = "banque_client", joinColumns = {
 			@JoinColumn(name = "client_idclient", nullable = false, updatable = false) }, inverseJoinColumns = {
 					@JoinColumn(name = "banque_idbanque", nullable = false, updatable = false) })
 	public Set<Banque> getBanques() {
@@ -230,10 +230,7 @@ public class Client implements java.io.Serializable {
 		this.comptes = comptes;
 	}
 
-	@ManyToMany(fetch = FetchType.LAZY)
-	@JoinTable(name = "carte_bancaire_client", catalog = "m_db", joinColumns = {
-			@JoinColumn(name = "client_idclient", nullable = false, updatable = false) }, inverseJoinColumns = {
-					@JoinColumn(name = "carte_idcarte", nullable = false, updatable = false) })
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "client")
 	public Set<CarteBancaire> getCarteBancaires() {
 		return this.carteBancaires;
 	}

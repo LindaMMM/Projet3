@@ -18,10 +18,9 @@ import javax.persistence.TemporalType;
  */
 @Entity
 @Table(name = "compteTiers")
-public class CompteTiers implements java.io.Serializable {
+public class CompteTiers extends Compte implements java.io.Serializable {
 
-	private int idcompteTiers;
-	private Compte compte;
+	
 	private String codeActivation;
 	private boolean actif;
 	private Date dateCreation;
@@ -30,44 +29,25 @@ public class CompteTiers implements java.io.Serializable {
 	public CompteTiers() {
 	}
 
-	public CompteTiers(int idcompteTiers, Compte compte, boolean actif, Date dateCreation, String libelle) {
-		this.idcompteTiers = idcompteTiers;
-		this.compte = compte;
+	public CompteTiers( boolean actif, Date dateCreation, String libelle) {
+	
 		this.actif = actif;
 		this.dateCreation = dateCreation;
 		this.libelle = libelle;
 	}
 
-	public CompteTiers(int idcompteTiers, Compte compte, String codeActivation, boolean actif, Date dateCreation,
+	/*public CompteTiers(int idcompteTiers, Compte compte, String codeActivation, boolean actif, Date dateCreation,
 			String libelle) {
-		this.idcompteTiers = idcompteTiers;
+		this.i = idcompteTiers;
 		this.compte = compte;
 		this.codeActivation = codeActivation;
 		this.actif = actif;
 		this.dateCreation = dateCreation;
 		this.libelle = libelle;
 	}
+*/
+	
 
-	@Id
-
-	@Column(name = "idcompteTiers", unique = true, nullable = false)
-	public int getIdcompteTiers() {
-		return this.idcompteTiers;
-	}
-
-	public void setIdcompteTiers(int idcompteTiers) {
-		this.idcompteTiers = idcompteTiers;
-	}
-
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "compte_idcompte", nullable = false)
-	public Compte getCompte() {
-		return this.compte;
-	}
-
-	public void setCompte(Compte compte) {
-		this.compte = compte;
-	}
 
 	@Column(name = "codeActivation", length = 8)
 	public String getCodeActivation() {

@@ -104,7 +104,7 @@ public class CarteBancaire implements java.io.Serializable {
 	}
 
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinTable(name = "client_idclient")
+	@JoinColumn(name = "id_client")
 	public Client getClient() {
 		return this.client;
 	}

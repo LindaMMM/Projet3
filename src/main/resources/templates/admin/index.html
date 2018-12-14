@@ -25,37 +25,18 @@
 		</a>
 		<div class="navbar-brand">
 			<div class="navbar-burger burger"
-				data-target="navbarExampleTransparentExample">
+				data-target="navbarAdmin">
 				<span></span> <span></span> <span></span>
 			</div>
 		</div>
 
-		<div id="navbarExampleTransparentExample" class="navbar-menu">
+		<div id="navbarAdmin" class="navbar-menu">
 			<div class="navbar-start">
-				<a class="navbar-item" th:href="@{/pages/users}"> Compte </a> <a
-					class="navbar-item" href="https://bulma.io/"> Carte & Services </a> <a
-					class="navbar-item" href="https://bulma.io/"> Epargne </a> <a
-					class="navbar-item" href="https://bulma.io/"> Credits </a><a
-					class="navbar-item" href="https://bulma.io/"> Assurances </a>
-				<div class="navbar-item has-dropdown is-hoverable">
-					<a class="navbar-link" href="/documentation/overview/start/">
-						Client </a>
-					<div class="navbar-dropdown">
-						<a class="navbar-item" href="newtiers"> Créer un Tiers </a> <a
-							class="navbar-item" href="newconseiller"> Créer un Conseiller
-						</a> <a class="navbar-item" href="newinterne"> Créer un Interne </a>
-					</div>
-				</div>
-
+				<a class="navbar-item" th:href="@{/admin/users}"> Compte </a>
+				
 				<div class="navbar-end">
-					<div class="navbar-item">
-						<div class="field">
-							<div class="control">
-								<form th:action="@{/logout}" method="post">
-									<input type="submit" value="Deconnexion" />
-								</form>
-							</div>
-						</div>
+					<div class="navbar-item" > <a th:href="@{/logout}"> Deconnexion </a>
+
 					</div>
 				</div>
 			</div>
@@ -64,10 +45,10 @@
 
 	<section class="section">
 		<div class="container has-text-centered">
-			<h1 th:inline="text">Bienvenue
+			<h1 class="title" th:inline="text">Bienvenue
 				[[${#httpServletRequest.remoteUser}]]!</h1>
-Admin!!!!!
-			<p>
+			<h2 class="subtitle" > vous êtes sur un vue d'admindtrateur</h2>
+
 			<p>Vous pouvez accéder sur votre gestion de compte.</p>
 		</div>
 	</section>

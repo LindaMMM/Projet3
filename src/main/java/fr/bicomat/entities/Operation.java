@@ -2,6 +2,8 @@ package fr.bicomat.entities;
 // default package
 // Generated 8 déc. 2018 07:10:38 by Hibernate Tools 5.2.11.Final
 
+import static javax.persistence.GenerationType.IDENTITY;
+
 import java.util.Date;
 import javax.persistence.AttributeOverride;
 import javax.persistence.AttributeOverrides;
@@ -9,6 +11,8 @@ import javax.persistence.Column;
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
@@ -22,7 +26,7 @@ import javax.persistence.TemporalType;
 @Table(name = "operation")
 public class Operation implements java.io.Serializable {
 
-	private OperationId id;
+	private Long id;
 	private Compte compte;
 	private int numOperation;
 	private Date dateOperation;
@@ -32,7 +36,7 @@ public class Operation implements java.io.Serializable {
 	public Operation() {
 	}
 
-	public Operation(OperationId id, Compte compte, int numOperation, Date dateOperation, double montant,
+	public Operation(Long id, Compte compte, int numOperation, Date dateOperation, double montant,
 			String typeOperation) {
 		this.id = id;
 		this.compte = compte;
@@ -42,16 +46,14 @@ public class Operation implements java.io.Serializable {
 		this.typeOperation = typeOperation;
 	}
 
-	@EmbeddedId
-
-	@AttributeOverrides({
-			@AttributeOverride(name = "idoperation", column = @Column(name = "idoperation", nullable = false)),
-			@AttributeOverride(name = "compteIdcompte", column = @Column(name = "compte_idcompte", nullable = false)) })
-	public OperationId getId() {
+	@Id
+	@GeneratedValue(strategy = IDENTITY)
+	@Column(name = "idcompte", unique = true, nullable = false)
+	public Long getId() {
 		return this.id;
 	}
 
-	public void setId(OperationId id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 

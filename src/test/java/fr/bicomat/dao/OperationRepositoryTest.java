@@ -24,7 +24,6 @@ import fr.bicomat.config.CompteException;
 import fr.bicomat.entities.Client;
 import fr.bicomat.entities.Compte;
 import fr.bicomat.entities.Operation;
-import fr.bicomat.entities.OperationId;
 import fr.bicomat.entities.OperationTemp;
 import fr.bicomat.entities.Virement;
 
@@ -53,8 +52,8 @@ public class OperationRepositoryTest {
       virement.setClient(client);
       virement.setCompteByCompteCrediteur(cptcred);
       virement.setCompteByCompteDebiteur(cptdeb);
-      virement.setDateCreation(dtf.format(localDate));
-      virement.setDateEcheance("30/12/2018");
+      virement.setDateCreation(new Date());
+      virement.setDateEcheance(new Date(2018,12,30));
       ibanqueService.saveOrUpdate(virement);
       
       //Vérifie que le virement est créé

@@ -66,17 +66,32 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-devtools</artifactId>
 		</dependency>
-			<!--DIENG Framework Batch -->
-         <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-batch</artifactId>
-        </dependency>
-     
-       
-    
-        <!--DIENG Framework Batch  end  -->
+		<!--DIENG Framework Batch -->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-batch</artifactId>
+		</dependency>
+
+
+
+		<!--DIENG Framework Batch end -->
+		<!-- email -->
+		<dependency>
+			<groupId>commons-lang</groupId>
+			<artifactId>commons-lang</artifactId>
+			<version>2.6</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-mail</artifactId>
+		</dependency>
 		<!-- Framework Html -->
 
+		<dependency>
+			<groupId>org.webjars.npm</groupId>
+			<artifactId>lodash</artifactId>
+			<version>4.17.10</version>
+		</dependency>
 		<dependency>
 			<groupId>org.webjars.npm</groupId>
 			<artifactId>bulma</artifactId>
@@ -86,6 +101,16 @@
 			<groupId>org.webjars</groupId>
 			<artifactId>jquery</artifactId>
 			<version>3.1.1</version>
+		</dependency>
+		<dependency>
+			<groupId>org.webjars</groupId>
+			<artifactId>datatables</artifactId>
+			<version>1.10.19</version>
+		</dependency>
+		<dependency>
+			<groupId>org.webjars.bower</groupId>
+			<artifactId>sweetalert2</artifactId>
+			<version>6.2.1</version>
 		</dependency>
 	</dependencies>
 

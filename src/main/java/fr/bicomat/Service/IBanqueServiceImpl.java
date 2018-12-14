@@ -19,7 +19,7 @@ import fr.bicomat.dao.VirementRepository;
 import fr.bicomat.entities.Client;
 import fr.bicomat.entities.Compte;
 import fr.bicomat.entities.Operation;
-import fr.bicomat.entities.OperationId;
+
 import fr.bicomat.entities.OperationTemp;
 import fr.bicomat.entities.Virement;
 
@@ -82,18 +82,15 @@ public class IBanqueServiceImpl implements IBanqueService {
 	 public void ajouterVirement(int CpteDebit,Date dateEch, int CptCred, double amount,String typeoperation,Compte comptedeb,Compte comptecerd,Long optemID) throws CompteException {
 		//virementRepository.save(virement);
 		Operation operationsDeb= new Operation();
-		OperationId operationIdDeb=new OperationId();
-		operationsDeb.setId(operationIdDeb);
 		operationsDeb.setDateOperation(dateEch);
 		operationsDeb.setTypeOperation(typeoperation);
 		operationsDeb.setMontant(-amount);
 		operationsDeb.setCompte(comptedeb);
 		operationRepository.save(operationsDeb);
+		
 		debiterCpte(CpteDebit,-amount);
 		Operation operationsCred= new Operation();
-		OperationId operationIdCred=new OperationId();
 		operationsCred.setCompte(comptecerd);
-		operationsCred.setId(operationIdCred);
 		operationsCred.setDateOperation(dateEch);
 		operationsCred.setTypeOperation(typeoperation);
 		operationsCred.setMontant(amount);
@@ -101,7 +98,6 @@ public class IBanqueServiceImpl implements IBanqueService {
 		
 		crediterCpte(CptCred, amount);
 		updateOpTemp(optemID, "Success");
-	
 		
 	}
 	

@@ -11,6 +11,7 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 
 
@@ -28,14 +29,31 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     
 	@Autowired
 	public void configureGlobalSecurity(AuthenticationManagerBuilder auth) throws Exception {
-		auth.userDetailsService(userDetailsService);
+		auth.userDetailsService(userDetailsService).passwordEncoder(new BCryptPasswordEncoder());
 		//auth.userDetailsService(userDetailsService);
 	}
 	
 	@Override
     protected void configure(HttpSecurity http) throws Exception {
 		
-		 http.authorizeRequests()
+		
+		
+		http.authorizeRequests()
+		
+		.antMatchers("/images/**","/webjars/**","/js/**", "/css/**", "/resetPassword","/api/**").permitAll()
+		.and()
+		.authorizeRequests()
+		.anyRequest().fullyAuthenticated()
+		.and()
+		.formLogin().loginPage("/login").permitAll()
+		.and().formLogin().loginPage("/login").successHandler(customSuccessHandler)
+	  	.usernameParameter("ssoId").passwordParameter("password")
+	  	.and().exceptionHandling().accessDeniedPage("/AccessDenied");
+		http.csrf().disable();
+	  	// .and().csrf().disable();
+	  	
+
+		/* http.authorizeRequests()
 		 	.antMatchers("/images/**","/js/**", "/css/**").permitAll()
 		  	.antMatchers("/", "/client/**").access("hasRole('CLIENT')")
 		  	.antMatchers("/agent/**").access("hasRole('AGENT')")
@@ -44,7 +62,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 		  	.usernameParameter("ssoId").passwordParameter("password")
 		  	.and().csrf()
 		  	.and().exceptionHandling().accessDeniedPage("/AccessDenied");
-		 
+		 */
        /* http
             .authorizeRequests()
                 .antMatchers("/", "/pages/", "/home","/images/**","/js/**", "/css/**").permitAll()
@@ -58,16 +76,5 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .permitAll();*/
     }
 
-    /*@Bean
-    @Override
-    public UserDetailsService userDetailsService() {
-        UserDetails user =
-             User.withDefaultPasswordEncoder()
-                .username("user")
-                .password("123")
-                .roles("USER")
-                .build();
 
-        return new InMemoryUserDetailsManager(user);
-    }*/
 }

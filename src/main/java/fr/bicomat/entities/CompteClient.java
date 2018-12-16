@@ -27,7 +27,7 @@ public class CompteClient extends Compte implements java.io.Serializable {
 	/**
 	 * Montant du découvert
 	 */
-	double montantDecouvert = 0 ;
+	private double montantDecouvert = 0 ;
 	
 	
 	@Column(name = "montantDecouvert", nullable = false, precision = 22, scale = 0)

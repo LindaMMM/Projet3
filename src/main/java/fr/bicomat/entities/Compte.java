@@ -29,23 +29,19 @@ public abstract class Compte implements java.io.Serializable {
 	 * Identifient de serialisation.
 	 */
 	private static final long serialVersionUID = 1L;
-	protected Integer idcompte;
-	protected Client client;
-	protected String libelle;
-	protected int numecompte;
-	protected String etatCompte = EtatCompte.OUVERT.getCode();
+	
+	private Integer idcompte;
+	private Client client;
+	private String libelle;
+	private int numecompte;
+	private String etatCompte = EtatCompte.OUVERT.getCode();
 	private String typeCompte = TypeCompte.LIV_A.getType() ;
 
 	//private String typeCompte;
-	protected InfoCompte infoCompte;
-	
-	/*protected Set<Operation> operations = new HashSet<Operation>(0);
-	protected Set<Virement> virementsForCompteCrediteur = new HashSet<Virement>(0);
-	protected Set<Virement> virementsForCompteDebiteur = new HashSet<Virement>(0);
-*/
-	protected Set<Operation> operations = new HashSet<Operation>(0);
-	protected Set<Virement> virementsForCompteCrediteur = new HashSet<Virement>(0);
-	protected Set<Virement> virementsForCompteDebiteur = new HashSet<Virement>(0);
+	private InfoCompte infoCompte;
+	private Set<Operation> operations = new HashSet<Operation>(0);
+	private Set<Virement> virementsForCompteCrediteur = new HashSet<Virement>(0);
+	private Set<Virement> virementsForCompteDebiteur = new HashSet<Virement>(0);
 	public Compte() {
 	}
 

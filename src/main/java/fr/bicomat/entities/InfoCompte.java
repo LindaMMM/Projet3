@@ -20,11 +20,17 @@ import javax.persistence.Table;
 @Table(name = "infoCompte")
 public class InfoCompte implements java.io.Serializable {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private Integer idinfoCompte;
 	private String libelle;
 	private int montantPlafond;
 	private int montantMinimum;
 	private long tauxInteret;
+	private String codeinfo;
+	
 	
 	
 	private Set<Compte> comptes = new HashSet<Compte>(0);
@@ -66,6 +72,15 @@ public class InfoCompte implements java.io.Serializable {
 
 	public void setLibelle(String libelle) {
 		this.libelle = libelle;
+	}
+
+	@Column(name = "codeinfo", nullable = false, length = 45)
+	public String getCodeinfo() {
+		return this.codeinfo;
+	}
+
+	public void setCodeinfo(String codeinfo) {
+		this.codeinfo = codeinfo;
 	}
 	
 	@Column(name = "montantPlafond", nullable = false)

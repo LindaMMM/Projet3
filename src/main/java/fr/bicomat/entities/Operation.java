@@ -65,7 +65,7 @@ public class Operation implements java.io.Serializable {
 	}
 
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "compte_idcompte", nullable = false, insertable = false, updatable = false)
+	@JoinColumn(name = "compte_idcompte", nullable = false, insertable = true, updatable = false)
 	public Compte getCompte() {
 		return this.compte;
 	}
@@ -102,7 +102,7 @@ public class Operation implements java.io.Serializable {
 		this.montant = montant;
 	}
 
-	@Column(name = "typeOperation", nullable = false, length = 5)
+	@Column(name = "typeOperation", nullable = false, length = 6)
 	public String getTypeOperation() {
 		return this.typeOperation;
 	}

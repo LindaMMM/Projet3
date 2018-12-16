@@ -3,6 +3,7 @@ package fr.bicomat.Service;
 import static org.junit.Assert.*;
 
 import java.util.Date;
+import java.util.Iterator;
 
 import javax.transaction.Transactional;
 
@@ -60,7 +61,7 @@ public class ServiceCompteTest {
 		cptClient2.setClient(client);
 		cptClient2.setNumecompte(002);
 		cptClient2.setLibelle("TestCompte");
-		cptClient2.setTypeCompte(TypeCompte.LIV_A.getType());
+		cptClient2.setTypeCompte(TypeCompte.COURANT.getType());
 		compteService.saveCompteClient(cptClient2);
 	}
 
@@ -94,8 +95,24 @@ public class ServiceCompteTest {
 		// Create Virement
 		Client client= clientService.getClientById(1);
 		
-		Compte compteByCompteCrediteur= compteService.getCompteClientById(1);
-		Compte compteByCompteDebiteur= compteService.getCompteClientById(2);
+		CompteClient compteByCompteCrediteur = null;
+		CompteClient compteByCompteDebiteur = null;
+		// lecture des comptes 
+		Iterator<Compte> it = client.getComptes().iterator();
+
+	    while(it.hasNext()){
+
+	    	Compte d = it.next();
+	    	if (d.getIdcompte().equals(1))
+	    	{
+	    		compteByCompteCrediteur = (CompteClient) d;
+	    	}
+
+	    	if (d.getIdcompte().equals(2))
+	    	{
+	    		compteByCompteDebiteur = (CompteClient) d;
+	    	}
+	    }
 		Date dateEcheance =  DateUtils.addDays(new Date(), 15);
 		Virement virement = new Virement(client, compteByCompteCrediteur, compteByCompteDebiteur, new Date(), TypeVirement.PONCTUEL.getCode(), dateEcheance);
 		
@@ -117,15 +134,43 @@ public class ServiceCompteTest {
 	public void testSaveOperation() {
 		// Creation d'une operation
 		Client client= clientService.getClientById(1);
-		Compte compteByCompteCrediteur= compteService.getCompteClientById(1);
-		Compte compteByCompteDebiteur= compteService.getCompteClientById(2);
+		CompteClient compteByCompteCrediteur = null;
+		CompteClient compteByCompteDebiteur = null;
+		// lecture des comptes 
+		Iterator<Compte> it = client.getComptes().iterator();
+
+	    while(it.hasNext()){
+
+	    	Compte d = it.next();
+	    	if (d.getIdcompte().equals(1))
+	    	{
+	    		compteByCompteCrediteur = (CompteClient) d;
+	    	}
+
+	    	if (d.getIdcompte().equals(2))
+	    	{
+	    		compteByCompteDebiteur = (CompteClient) d;
+	    	}
+	    }
+		
+		
+	//	CompteClient compteByCompteCrediteur = client.getComptes().iterator().next();
+		//CompteClient compteByCompteCrediteur= compteService.getCompteClientById(1);
 		Operation op = new Operation(compteByCompteCrediteur, 1, new Date(), 15.0,
 				TypeOperation.CREDIT.getType());
 		op.setLibelleOperation("Test Crédit");
+		//op.setCompte(compteByCompteCrediteur);
+		compteByCompteCrediteur.getOperations().add(op);
+		///compteService.saveCompteClient(compteByCompteCrediteur);
+		compteService.saveOperation(op);
+		
+		
+		//CompteClient compteByCompteDebiteur= compteService.getCompteClientById(2);
 		Operation op2 = new Operation(compteByCompteDebiteur, 1, new Date(), 15.0,
 				TypeOperation.DEBIT.getType());
 		op2.setLibelleOperation("Test Dédit");
-		compteService.saveOperation(op);
+		op.setCompte(compteByCompteDebiteur);
+		// compteService.saveCompteClient(compteByCompteCrediteur);
 		compteService.saveOperation(op2);
 	}
 

@@ -55,7 +55,7 @@ public class ServiceBanqueTest {
 		Conseiller conseilupadte = banqueService.saveConseillier(conseillier);
 		assertFalse(conseilupadte.getIdconseil() == null);
 		Integer id =  conseilupadte.getIdconseil();
-		banqueService.deleteBank(id);
+		banqueService.deleteConseillier(id);
 	}
 
 	@Test

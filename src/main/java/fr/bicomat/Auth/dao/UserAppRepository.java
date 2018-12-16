@@ -33,5 +33,11 @@ public interface UserAppRepository extends JpaRepository<User_App, Integer> {
 	 * @return un utilisateur.
 	 */
    User_App findByEmail(String email);
-    
+   
+   /**
+	 * Obtient l'utilisateur son id Client.
+	 * @param idClient identifiant du client.
+	 * @return un utilisateur.
+	 */
+   User_App findByIdClient(Integer idClient);
 }

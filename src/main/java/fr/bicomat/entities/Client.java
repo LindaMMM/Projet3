@@ -48,9 +48,8 @@ public class Client implements java.io.Serializable {
 	public Client() {
 	}
 
-	public Client(Conseiller conseiller, String numagency, String nomClient, String prenomClient, Date anneeArrive) {
+	public Client(Conseiller conseiller, String nomClient, String prenomClient, Date anneeArrive) {
 		this.conseiller = conseiller;
-		this.numagency = numagency;
 		this.nomClient = nomClient;
 		this.prenomClient = prenomClient;
 		this.anneeArrive = anneeArrive;
@@ -100,7 +99,7 @@ public class Client implements java.io.Serializable {
 		this.conseiller = conseiller;
 	}
 
-	@Column(name = "numagency", nullable = false, length = 15)
+	@Column(name = "numagency", nullable = true, length = 15)
 	public String getNumagency() {
 		return this.numagency;
 	}

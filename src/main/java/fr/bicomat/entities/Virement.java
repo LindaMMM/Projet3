@@ -24,18 +24,80 @@ import javax.persistence.TemporalType;
 @Table(name = "virement")
 public class Virement implements java.io.Serializable {
 
+	/**
+	 * Identifiant de la serialisation.
+	 */
+	private static final long serialVersionUID = 1L;
+	/**
+	 * Identifiant du virement
+	 */
 	private Long idvirement;
+	
+	/**
+	 * Client qui gére le virement. 
+	 */
 	private Client client;
+	
+	/**
+	 * Compte créditeur.
+	 */
 	private Compte compteByCompteCrediteur;
+
+	/**
+	 * Compte débiteur.
+	 */
 	private Compte compteByCompteDebiteur;
+	
+	/**
+	 * Date de la création du prélévement.
+	 */
 	private Date dateCreation;
-	private String typeVirement;
+	
+	/**
+	 * Type de virement. 
+	 */
+	private String typeVirement = TypeVirement.PONCTUEL.getCode();
+	
+	/**
+	 * Date à partir de laquelle le prélèvement est actif. 
+	 */
 	private Date dateEcheance;
+	
+	/**
+	 * Date du dernier prélévement. 
+	 */
+	private Date dateLastPrelevement;
+	
+	/**
+	 * Date de fin du prélévement. 
+	 */
+	private Date dateFinPrelevement;
+	
+	/**
+	 * Prélévement est actif. 
+	 */
+	private boolean actif = false;
+	
+	/**
+	 * Montant à prélever.
+	 */
 	private double montant;
 
+	/**
+	 * Constructeur du prélévement.
+	 */
 	public Virement() {
 	}
 
+	/**
+	 * Constructeur du prélévement. 
+	 * @param client Client qui a créé le prélévement.
+	 * @param compteByCompteCrediteur Compte à débiter.
+	 * @param compteByCompteDebiteur Compte à créditer.
+	 * @param dateCreation Date de la création du prélévement.
+	 * @param typeVirement type de prélévement.
+	 * @param dateEcheance Date d'application.
+	 */
 	public Virement(Client client, Compte compteByCompteCrediteur, Compte compteByCompteDebiteur, Date dateCreation,
 			String typeVirement, Date dateEcheance) {
 		this.client = client;
@@ -87,7 +149,7 @@ public class Virement implements java.io.Serializable {
 	public void setCompteByCompteDebiteur(Compte compteByCompteDebiteur) {
 		this.compteByCompteDebiteur = compteByCompteDebiteur;
 	}
-	@Temporal(TemporalType.TIMESTAMP)
+	@Temporal(TemporalType.DATE)
 	@Column(name = "dateCreation", nullable = false, length = 19)
 	public Date getDateCreation() {
 		return this.dateCreation;
@@ -95,6 +157,16 @@ public class Virement implements java.io.Serializable {
 
 	public void setDateCreation(Date dateCreation) {
 		this.dateCreation = dateCreation;
+	}
+
+	@Temporal(TemporalType.DATE)
+	@Column(name = "dateLast", nullable = true, length = 19)
+	public Date getDateLastPrelevement() {
+		return this.dateLastPrelevement;
+	}
+
+	public void setDateLastPrelevement(Date lastprelevement) {
+		this.dateLastPrelevement = lastprelevement;
 	}
 
 	@Column(name = "typeVirement", nullable = false, length = 5)
@@ -106,7 +178,7 @@ public class Virement implements java.io.Serializable {
 		this.typeVirement = typeVirement;
 	}
 	
-	@Temporal(TemporalType.TIMESTAMP)
+	@Temporal(TemporalType.DATE)
 	@Column(name = "dateEcheance", nullable = false, length = 19)
 	public Date getDateEcheance() {
 		return this.dateEcheance;
@@ -123,6 +195,25 @@ public class Virement implements java.io.Serializable {
 
 	public void setMontant(double montant) {
 		this.montant = montant;
+	}
+
+	@Temporal(TemporalType.DATE)
+	@Column(name = "dateEnd", nullable = true, length = 19)
+	public Date getDateFinPrelevement() {
+		return this.dateFinPrelevement;
+	}
+
+	public void setDateFinPrelevement(Date dateFinPrelevement) {
+		this.dateFinPrelevement = dateFinPrelevement;
+	}
+	
+	@Column(name = "actif", nullable = false, columnDefinition = "TINYINT", length = 1)
+	public boolean getActif() {
+		return this.actif;
+	}
+
+	public void setActif(boolean actif) {
+		this.actif = actif;
 	}
 	
 }

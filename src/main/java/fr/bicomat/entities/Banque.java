@@ -71,7 +71,7 @@ public class Banque implements java.io.Serializable {
 	}
 
 	@ManyToMany(fetch = FetchType.LAZY)
-	@JoinTable(name = "banque_client", catalog = "m_db", joinColumns = {
+	@JoinTable(name = "banque_client", joinColumns = {
 			@JoinColumn(name = "banque_idbanque", nullable = false, updatable = false) }, inverseJoinColumns = {
 					@JoinColumn(name = "client_idclient", nullable = false, updatable = false) })
 	public Set<Client> getClients() {

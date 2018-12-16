@@ -14,13 +14,13 @@ import fr.bicomat.config.CompteException;
 import fr.bicomat.dao.ClientRepository;
 import fr.bicomat.dao.CompteRepository;
 import fr.bicomat.dao.OperationRepository;
-import fr.bicomat.dao.OperationTempRepository;
+
 import fr.bicomat.dao.VirementRepository;
 import fr.bicomat.entities.Client;
 import fr.bicomat.entities.Compte;
 import fr.bicomat.entities.Operation;
 
-import fr.bicomat.entities.OperationTemp;
+
 import fr.bicomat.entities.Virement;
 
 @Service
@@ -35,11 +35,11 @@ public class IBanqueServiceImpl implements IBanqueService {
 	@Autowired
 	ClientRepository clientRepository;
 	@Autowired
-	OperationTempRepository operationtemprepo;
+	/*OperationTempRepository operationtemprepo;
 	@Override
 	 public List<OperationTemp> getOperationEchue(Date echeance){
 		 return (List<OperationTemp>) operationtemprepo.findByDateechance(echeance);
-	 }
+	 }*/
 	
 	@Override
 	
@@ -51,7 +51,7 @@ public class IBanqueServiceImpl implements IBanqueService {
 		virementRepository.deleteById(id);
 		
 	}
-	@Override
+	/*@Override
 	public OperationTemp getOperationTempById(Long id) {
 		return operationtemprepo.findById(Math.toIntExact(id)).get();
 	}
@@ -61,7 +61,7 @@ public class IBanqueServiceImpl implements IBanqueService {
 		op.setStatus(statut);
 		operationtemprepo.save(op);
 		 
-	 }
+	 }*/
 	@Override
 	public Virement getVirementById(long id) {
 		return virementRepository.findById(id).get();
@@ -102,7 +102,7 @@ public class IBanqueServiceImpl implements IBanqueService {
 	}
 	
 	
-	@Override
+	/*@Override
 	 public void loadOperationTemp(Date dateEch, double amount, String typeoperation, int CpteDebit,Long numero,int CptCred) {
 		OperationTemp tmp= new OperationTemp();
 		tmp.setDateoperation(dateEch);
@@ -114,7 +114,7 @@ public class IBanqueServiceImpl implements IBanqueService {
 		tmp.setNumoperation(Math.toIntExact(numero));
 		operationtemprepo.save(tmp);
 		 
-	 }
+	 }*/
 	
 	@Override
 	 public void debiterCpte(int CpteDebi,double amount) throws CompteException   {
@@ -163,4 +163,15 @@ public class IBanqueServiceImpl implements IBanqueService {
 		return clientRepository.save(clt);
 	}
 	//============================================================================
+	@Override
+	public void loadOperationTemp(Date dateEch, double amount, String typeoperation, int CpteDebit, Long numero,
+			int CptCred) {
+		// TODO Auto-generated method stub
+		
+	}
+	@Override
+	public void updateOpTemp(Long id, String statut) {
+		// TODO Auto-generated method stub
+		
+	}
 }

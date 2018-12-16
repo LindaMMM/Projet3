@@ -5,6 +5,7 @@ package fr.bicomat.entities;
 import java.util.HashSet;
 import java.util.Set;
 import javax.persistence.Column;
+import javax.persistence.DiscriminatorColumn;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -20,31 +21,37 @@ import javax.persistence.InheritanceType;
 
 @Entity
 @Table(name = "compte")
-@Inheritance(
-    strategy = InheritanceType.JOINED
-)
+@DiscriminatorColumn(name = "categorie")
+@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 public abstract class Compte implements java.io.Serializable {
 
-	private Integer idcompte;
-	private Client client;
-	
-	private int numecompte;
-	private double solde;
-	private String typeCompte;
-	private InfoCompte infoCompte;
-	
-	private Set<Operation> operations = new HashSet<Operation>(0);
-	private Set<Virement> virementsForCompteCrediteur = new HashSet<Virement>(0);
-	private Set<Virement> virementsForCompteDebiteur = new HashSet<Virement>(0);
+	/**
+	 * Identifient de serialisation.
+	 */
+	private static final long serialVersionUID = 1L;
+	protected Integer idcompte;
+	protected Client client;
+	protected String libelle;
+	protected int numecompte;
+	protected String etatCompte = EtatCompte.OUVERT.getCode();
+	private String typeCompte = TypeCompte.LIV_A.getType() ;
 
+	//private String typeCompte;
+	protected InfoCompte infoCompte;
+	
+	/*protected Set<Operation> operations = new HashSet<Operation>(0);
+	protected Set<Virement> virementsForCompteCrediteur = new HashSet<Virement>(0);
+	protected Set<Virement> virementsForCompteDebiteur = new HashSet<Virement>(0);
+*/
+	protected Set<Operation> operations = new HashSet<Operation>(0);
+	protected Set<Virement> virementsForCompteCrediteur = new HashSet<Virement>(0);
+	protected Set<Virement> virementsForCompteDebiteur = new HashSet<Virement>(0);
 	public Compte() {
 	}
 
-	public Compte(Client client, int numecompte, double solde, String typeCompte) {
+	public Compte(Client client, int numecompte) {
 		this.client = client;
 		this.numecompte = numecompte;
-		this.solde = solde;
-		this.typeCompte = typeCompte;
 	}
 
 	/*public Compte(Client client, InfoCompte infoCompte, int numecompte, double solde, String typeCompte,
@@ -63,8 +70,8 @@ public abstract class Compte implements java.io.Serializable {
 */
 	@Id
 	@GeneratedValue(strategy = IDENTITY)
-
-	@Column(name = "idcompte", unique = true, nullable = false)
+	
+	@Column(name = "idcompte", unique = true, updatable = false, nullable = false)
 	public Integer getIdcompte() {
 		return this.idcompte;
 	}
@@ -92,7 +99,16 @@ public abstract class Compte implements java.io.Serializable {
 	public void setInfoCompte(InfoCompte infoCompte) {
 		this.infoCompte = infoCompte;
 	}
+	
+	@Column(name = "typeCompte", nullable = false, length = 45)
+	public String getTypeCompte() {
+		return this.typeCompte;
+	}
 
+	public void setTypeCompte(String typeCompte) {
+		this.typeCompte = typeCompte;
+	}
+	
 	@Column(name = "numecompte", nullable = false)
 	public int getNumecompte() {
 		return this.numecompte;
@@ -101,26 +117,6 @@ public abstract class Compte implements java.io.Serializable {
 	public void setNumecompte(int numecompte) {
 		this.numecompte = numecompte;
 	}
-
-	@Column(name = "solde", nullable = false, precision = 22, scale = 0)
-	public double getSolde() {
-		return this.solde;
-	}
-
-	public void setSolde(double solde) {
-		this.solde = solde;
-	}
-
-	@Column(name = "typeCompte", nullable = false, length = 20)
-	public String getTypeCompte() {
-		return this.typeCompte;
-	}
-
-	public void setTypeCompte(String typeCompte) {
-		this.typeCompte = typeCompte;
-	}
-
-	
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "compte")
 	public Set<Operation> getOperations() {
@@ -148,5 +144,23 @@ public abstract class Compte implements java.io.Serializable {
 	public void setVirementsForCompteDebiteur(Set<Virement> virementsForCompteDebiteur) {
 		this.virementsForCompteDebiteur = virementsForCompteDebiteur;
 	}
+	@Column(name = "etatCompte", nullable = false, length = 1)
+	public String getEtatCompte() {
+		return this.etatCompte;
+	}
+
+	public void setEtatCompte(String etatCompte) {
+		this.etatCompte = etatCompte;
+	}
+	
+	@Column(name = "libelle", nullable = false, length = 45)
+	public String getLibelle() {
+		return this.libelle;
+	}
+
+	public void setLibelle(String libelle) {
+		this.libelle = libelle;
+	}
+	
 
 }

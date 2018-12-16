@@ -85,6 +85,11 @@ public class User_App implements java.io.Serializable {
 	private Integer idClient ;
 	
 	/**
+	 * Identifiant de l'employe.
+	 */
+	private Integer idEmploye ;
+	
+	/**
 	 * Profile de l'utilisateur.
 	 */
 	private Set<UserProfile> userProfiles = new HashSet<UserProfile>(0);
@@ -200,13 +205,22 @@ public class User_App implements java.io.Serializable {
 	 * Identifiant de la fiche client.
 	 */
 	
-	@Column(name = "id_interne", nullable = true, length = 8)
+	@Column(name = "id_client", nullable = true, length = 8)
 	public Integer getIdClient() {
 		return this.idClient;
 	}
 
 	public void setIdClient(Integer id) {
 		this.idClient = id;
+	}
+	
+	@Column(name = "id_interne", nullable = true, length = 8)
+	public Integer getIdEmploye() {
+		return this.idEmploye;
+	}
+
+	public void setIdEmploye(Integer id) {
+		this.idEmploye = id;
 	}
 	/**
 	 * Nombre d'Essai en erreur.

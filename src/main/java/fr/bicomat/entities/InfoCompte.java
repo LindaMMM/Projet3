@@ -25,6 +25,8 @@ public class InfoCompte implements java.io.Serializable {
 	private int montantPlafond;
 	private int montantMinimum;
 	private long tauxInteret;
+	
+	
 	private Set<Compte> comptes = new HashSet<Compte>(0);
 
 	public InfoCompte() {
@@ -65,7 +67,7 @@ public class InfoCompte implements java.io.Serializable {
 	public void setLibelle(String libelle) {
 		this.libelle = libelle;
 	}
-
+	
 	@Column(name = "montantPlafond", nullable = false)
 	public int getMontantPlafond() {
 		return this.montantPlafond;

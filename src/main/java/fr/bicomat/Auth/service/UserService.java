@@ -5,6 +5,8 @@ import java.util.List;
 import fr.bicomat.Auth.entities.UserQuestion;
 import fr.bicomat.Auth.entities.User_App;
 import fr.bicomat.Auth.entities.dtoChangedPassword;
+import fr.bicomat.entities.Client;
+import fr.bicomat.entities.Conseiller;
 
 /**
  * Service des gestion des users. 
@@ -103,6 +105,21 @@ public interface UserService {
 	 */
 	boolean resetPwd(String ssoId, String numcarte, String reponse);
 
-	
-	
+	/**
+	 * 
+	 * @param client
+	 * @param login
+	 * @return
+	 */
+	User_App addUserClient(Client client, String login) throws IllegalArgumentException;
+
+	/**
+	 * 
+	 * @param conseiller
+	 * @param email
+	 * @param login
+	 * @return
+	 */
+	User_App addUserConseiller(Conseiller conseiller, String email, String login) throws IllegalArgumentException ;
+		
 }

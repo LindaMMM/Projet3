@@ -8,7 +8,6 @@ import fr.bicomat.config.CompteException;
 import fr.bicomat.entities.Client;
 import fr.bicomat.entities.Compte;
 import fr.bicomat.entities.Operation;
-import fr.bicomat.entities.OperationTemp;
 import fr.bicomat.entities.Virement;
 
 public interface IBanqueService {
@@ -29,8 +28,8 @@ public interface IBanqueService {
 	 public void crediterCpte (int CpteCred,double amount) throws CompteException;
 	 public Client getClientById(int id);
 	 public  Compte getCompteById(int id);
-	 public List<OperationTemp> getOperationEchue(Date echeance);
-	 public OperationTemp getOperationTempById(Long id);
+	// public List<OperationTemp> getOperationEchue(Date echeance);
+	//  public OperationTemp getOperationTempById(Long id);
 	 public void updateOpTemp(Long id,String statut);
 	 
 }

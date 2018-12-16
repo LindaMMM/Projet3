@@ -15,7 +15,7 @@ import org.springframework.stereotype.Component;
 import fr.bicomat.Service.IBanqueService;
 import fr.bicomat.config.CompteException;
 import fr.bicomat.entities.Compte;
-import fr.bicomat.entities.OperationTemp;
+
 
 @Component
 
@@ -39,7 +39,7 @@ public class ScheduledTasksOperation {
 	        Date dates = new SimpleDateFormat("yyyy-MM-dd").parse(formattedDate);
 	        
 		
-				for(OperationTemp op :  ibanqueService.getOperationEchue(dates) ) {
+			/*	for(OperationTemp op :  ibanqueService.getOperationEchue(dates) ) {
 				     if (op.getDateechance()==dates) {
 				    	 Compte cptdeb =ibanqueService.getCompteById(op.getIdcomptedeb());
 				 		Compte cptcred=ibanqueService.getCompteById(op.getIdcomptecred());
@@ -56,6 +56,6 @@ public class ScheduledTasksOperation {
 				     }
 					}
 		 
-     
+     */
     }
 }

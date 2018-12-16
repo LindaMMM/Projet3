@@ -9,7 +9,7 @@ import org.springframework.stereotype.Repository;
 import fr.bicomat.entities.Banque;
 
 @Repository
-public interface BanqueRepository extends JpaRepository<Banque, Long> {
+public interface BanqueRepository extends JpaRepository<Banque, Integer> {
 
 	/*@Query("select u from Banque u where u.id_banque = ?1")
 	  Banque findByidbanque(Long idbanque);*/

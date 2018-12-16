@@ -16,6 +16,8 @@ import fr.bicomat.Auth.entities.UserQuestion;
 import fr.bicomat.Auth.entities.User_App;
 import fr.bicomat.Auth.entities.dtoChangedPassword;
 import fr.bicomat.Service.ClientService;
+import fr.bicomat.entities.Client;
+import fr.bicomat.entities.Conseiller;
 import fr.bicomat.Auth.dao.UserAppRepository;
 import fr.bicomat.Auth.dao.UserProfileRepository;
 import fr.bicomat.Auth.dao.UserQuestionRepository;
@@ -51,11 +53,15 @@ public class UserServiceImpl implements UserService {
 
 		@Override
 		public User_App saveUser(User_App user) {
-			boolean sendEmail = user.getId()==0;
+			boolean newUser = user.getId() == null;
+			
+			if (newUser) {
+				user.setPassword(generadNewPassword());
+			}
 			
 			User_App usrTemp = userRepository.save(user);
 			
-			if(sendEmail){
+			if(newUser){
 				serviceEmail.sendConfirmationEmail(user);
 				serviceEmail.sendNewPassWordEmail(user);
 			}
@@ -157,5 +163,56 @@ public class UserServiceImpl implements UserService {
 			}
 		
 			return false;
+		}
+
+		@Override
+		public User_App addUserClient(Client client, String login) throws IllegalArgumentException {
+			// verification du compte n'existe pas.
+			User_App user = userRepository.findByIdClient(client.getIdclient());
+			if (!user.equals(null)){
+				throw new IllegalArgumentException("Le client à déjà un compte agency");
+			}
+			testCreateUser(login,client.getEmail());
+			
+			
+			/** ajout*/
+			UserProfile typClient = userProfilRepository.findByType(UserProfileType.CLIENT.getUserProfileType());
+			user = new User_App();
+			user.setEmail(client.getEmail());
+			user.setFirstName(client.getPrenomClient());
+			user.setLastName(client.getNomClient());
+			user.getUserProfiles().add(typClient);
+			user.setSsoId(login);
+			user.setIdClient(client.getIdclient());
+			return saveUser(user);
+		}
+		@Override
+		public User_App addUserConseiller(Conseiller conseiller, String email, String login) throws IllegalArgumentException {
+			testCreateUser(login,email);
+			UserProfile typAgent = userProfilRepository.findByType(UserProfileType.AGENT.getUserProfileType());
+			User_App user = new User_App();
+			user.setEmail(email);
+			user.setSsoId(login);
+			user.setFirstName(conseiller.getPrenomConseil());
+			user.setLastName(conseiller.getNomConseil());
+			user.getUserProfiles().add(typAgent);
+			user.setIdEmploye(conseiller.getIdconseil());
+			return saveUser(user);
+		}
+		
+		private void testCreateUser(String login,String email) throws IllegalArgumentException {
+			if (email.isEmpty()) {
+				throw new IllegalArgumentException("L'email ne peut pas être vide");
+			}
+			
+			User_App user = userRepository.findBySsoId(login);
+			if (user != null) {
+				throw new IllegalArgumentException("Ce login est déjà utilisé");
+			}
+			
+			user = userRepository.findByEmail(email);
+			if (user != null) {
+				throw new IllegalArgumentException("Ce email est déjà utilisé");
+			}
 		}
 	}

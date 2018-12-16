@@ -27,7 +27,7 @@ public class Alerte implements java.io.Serializable {
 	private Date dateAlerte;
 	private String titre;
 	private String descriptif;
-	private String typeEnvoi;
+	private String typeEnvoi = TypeEnvoi.SMS.getType();
 
 	public Alerte() {
 	}

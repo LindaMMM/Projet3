@@ -19,7 +19,7 @@ import fr.bicomat.Service.IBanqueService;
 import fr.bicomat.dao.BanqueRepository;
 import fr.bicomat.entities.Banque;
 import fr.bicomat.entities.CompteTiers;
-import fr.bicomat.entities.OperationTemp;
+
 import fr.bicomat.entities.Virement;
 
 @Controller
@@ -41,11 +41,11 @@ public class BanqueController {
 		Date dates =new SimpleDateFormat("yyyy-MM-dd").parse("2018-12-15");
 		System.out.println(dates);
 		System.out.println(" test ================================");
-		for(OperationTemp op :  ibanqueService.getOperationEchue(dates) ) {
+		/*for(OperationTemp op :  ibanqueService.getOperationEchue(dates) ) {
 			System.out.println(op.getDateechance());
 			System.out.println("================================");
 			}
- 
+ */
         return "homes";
     }
 	

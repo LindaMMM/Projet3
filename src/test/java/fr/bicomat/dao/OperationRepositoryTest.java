@@ -24,7 +24,6 @@ import fr.bicomat.config.CompteException;
 import fr.bicomat.entities.Client;
 import fr.bicomat.entities.Compte;
 import fr.bicomat.entities.Operation;
-import fr.bicomat.entities.OperationTemp;
 import fr.bicomat.entities.Virement;
 
 @RunWith(SpringRunner.class)

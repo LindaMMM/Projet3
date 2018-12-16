@@ -26,19 +26,26 @@ import javax.persistence.TemporalType;
 @Table(name = "operation")
 public class Operation implements java.io.Serializable {
 
+	/**
+	 * Identifiant de serialization.
+	 */
+	private static final long serialVersionUID = 1L;
 	private Long id;
 	private Compte compte;
 	private int numOperation;
+	private String libelleOperation;
 	private Date dateOperation;
 	private double montant;
-	private String typeOperation;
-
+	private String typeOperation = TypeOperation.CREDIT.getType();
+	boolean pointer = false;
+	boolean opposition = false;
+	
 	public Operation() {
 	}
 
-	public Operation(Long id, Compte compte, int numOperation, Date dateOperation, double montant,
+	public Operation( Compte compte, int numOperation, Date dateOperation, double montant,
 			String typeOperation) {
-		this.id = id;
+
 		this.compte = compte;
 		this.numOperation = numOperation;
 		this.dateOperation = dateOperation;
@@ -76,7 +83,7 @@ public class Operation implements java.io.Serializable {
 		this.numOperation = numOperation;
 	}
 
-	@Temporal(TemporalType.TIMESTAMP)
+	@Temporal(TemporalType.DATE)
 	@Column(name = "dateOperation", nullable = false, length = 19)
 	public Date getDateOperation() {
 		return this.dateOperation;
@@ -103,5 +110,32 @@ public class Operation implements java.io.Serializable {
 	public void setTypeOperation(String typeOperation) {
 		this.typeOperation = typeOperation;
 	}
+	
+	@Column(name = "libelle", nullable = false, length = 45)
+	public String getLibelleOperation() {
+		return this.libelleOperation;
+	}
 
+	public void setLibelleOperation(String libelleOperation) {
+		this.libelleOperation = libelleOperation;
+	}
+	
+	
+	@Column(name = "pointer", nullable = false, columnDefinition = "TINYINT", length = 1)
+	public boolean getPointer() {
+		return this.pointer;
+	}
+
+	public void setPointer(boolean pointer) {
+		this.pointer = pointer;
+	}
+
+	@Column(name = "opposition", nullable = false, columnDefinition = "TINYINT", length = 1)
+	public boolean getOpposition() {
+		return this.opposition;
+	}
+
+	public void setOpposition(boolean opposition) {
+		this.opposition = opposition;
+	}
 }

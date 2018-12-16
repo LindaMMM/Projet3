@@ -29,13 +29,18 @@ import fr.bicomat.Auth.entities.UserQuestion;
 @Table(name = "carte_bancaire", uniqueConstraints = @UniqueConstraint(columnNames = "numcarte"))
 public class CarteBancaire implements java.io.Serializable {
 
+	/**
+	 * Identifiant de la table.
+	 */
+	private static final long serialVersionUID = 1L;
 	private Integer idCarte;
 	private String numcarte;
 	private String codecrypto;
 	private Date echeance;
-	private String typecarte;
+	private String typecarte = TypeCarte.CARTE_BLEU.getType();
 	private Client client ;
-
+	private boolean opposition ;
+	
 	public CarteBancaire() {
 	}
 
@@ -112,5 +117,15 @@ public class CarteBancaire implements java.io.Serializable {
 	public void setClient(Client client) {
 		this.client = client;
 	}
+	
+	@Column(name = "opposition", nullable = false, columnDefinition = "TINYINT", length = 1)
+	public boolean getOpposition() {
+		return this.opposition;
+	}
+
+	public void setOpposition(boolean opposition) {
+		this.opposition = opposition;
+	}
+	
 
 }

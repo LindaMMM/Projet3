@@ -1,2 +1,35 @@
-mvn install -DskipTests=true -Dmaven.javadoc.skip=true -B -V
-mvn clean compile
+# specify language
+language: java
+jdk:
+- 1.8
+sudo: false
+script: mvn clean compile
+
+# configure which branches to run
+branches:
+  # whitelist
+  only:
+    - master
+    - /^deploy-.*$/ # regex ok
+  # blacklist
+  except:
+    - develop 
+ after_script: # here's a build step block
+- echo "Say Hello"
+
+after_script:
+- test $TRAVIS_PULL_REQUEST = false \
+  && echo "not a pull request" \
+  && git push \
+  
+notifications: # set notification options
+  email:
+    recipients:
+      - linda_benchabane@hotmail.com
+
+    # change is when the repo status goes from pass to fail or vice versa
+    on_success: change
+on_failure: always
+
+# mvn install -DskipTests=true -Dmaven.javadoc.skip=true -B -V
+# mvn clean compile

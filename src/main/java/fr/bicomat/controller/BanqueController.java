@@ -15,7 +15,6 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import fr.bicomat.Service.IBanqueService;
 import fr.bicomat.dao.BanqueRepository;
 import fr.bicomat.entities.Banque;
 import fr.bicomat.entities.CompteTiers;
@@ -32,8 +31,7 @@ public class BanqueController {
 		return "newbanque";
 	}
 	
-	@Autowired
-	private IBanqueService ibanqueService;
+
 
 	
 	@RequestMapping("/homes")

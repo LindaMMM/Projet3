@@ -12,7 +12,6 @@ import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
 
-import fr.bicomat.Service.IBanqueService;
 import fr.bicomat.config.CompteException;
 import fr.bicomat.entities.Compte;
 
@@ -23,8 +22,6 @@ public class ScheduledTasksOperation {
 
     private static final Logger log = LoggerFactory.getLogger(ScheduledTasksOperation.class);
    
-	@Autowired
-	IBanqueService ibanqueService;
    // @Scheduled(fixedRate = 5000)
 	  @Scheduled(cron="0 0 00 * * *")
       public void OperationPeriodique() throws ParseException {

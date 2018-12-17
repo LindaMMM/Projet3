@@ -28,7 +28,7 @@ import fr.bicomat.entities.Virement;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
-@Transactional()
+
 public class ServiceCompteTest {
 
 	@Autowired

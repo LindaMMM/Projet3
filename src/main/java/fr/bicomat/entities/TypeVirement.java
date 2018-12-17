@@ -82,7 +82,7 @@ public enum TypeVirement {
 	 */
 	public static TypeVirement fromString(String text) {
 	    for (TypeVirement b : TypeVirement.values()) {
-	      if (b.typeVirement.equalsIgnoreCase(text)) {
+	      if (b.code.equalsIgnoreCase(text)) {
 	        return b;
 	      }
 	    }

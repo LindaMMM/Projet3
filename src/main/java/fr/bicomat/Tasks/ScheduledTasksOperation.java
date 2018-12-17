@@ -6,6 +6,7 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Set;
 
 import org.slf4j.Logger;
@@ -46,7 +47,9 @@ public class ScheduledTasksOperation {
 	private static final Logger log = LoggerFactory.getLogger(ScheduledTasksOperation.class);
 
 	// @Scheduled(fixedRate = 5000)
-	@Scheduled(cron="0 0 00 * * *")
+	
+	 @Scheduled(cron="0 30 17 * * ?")
+	// @Scheduled(fixedRate = 5000)
 	public void OperationPeriodique() throws ParseException {
 
 		log.debug("Lancement de la tâche Journalinière");

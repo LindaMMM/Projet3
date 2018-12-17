@@ -75,11 +75,11 @@ public class InfoCompte implements java.io.Serializable {
 	}
 
 	@Column(name = "codeinfo", nullable = false, length = 45)
-	public String getCodeinfo() {
+	public String getCodeInfo() {
 		return this.codeinfo;
 	}
 
-	public void setCodeinfo(String codeinfo) {
+	public void setCodeInfo(String codeinfo) {
 		this.codeinfo = codeinfo;
 	}
 	

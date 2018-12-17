@@ -1,11 +1,16 @@
 package fr.bicomat.Service;
 
+import java.util.Date;
+import java.util.Set;
+
+import fr.bicomat.entities.Alerte;
 import fr.bicomat.entities.CompteClient;
 import fr.bicomat.entities.CompteTiers;
 import fr.bicomat.entities.Operation;
+import fr.bicomat.entities.Prelevement;
 import fr.bicomat.entities.Virement;
 
-public interface ServiceCompte {
+public interface CompteService {
 	
 	/**
 	 * Obtient le compte client.
@@ -115,6 +120,13 @@ public interface ServiceCompte {
 	public Virement saveVirement(Virement virement) throws IllegalArgumentException ;
 
 	/**
+	 * Enregistre les opération d'un Virement.
+	 * @param virement objet virement.
+	 * @return le virement mise à jour.
+	 */
+	public Virement saveOperation(Virement virement) throws IllegalArgumentException ;
+	
+	/**
 	 * Suppprime un virement à partir de son id.
 	 * @param id identifiant du virement.
 	 */
@@ -129,7 +141,7 @@ public interface ServiceCompte {
 	/**
 	 * Obtient une opérations.
 	 * @param id identifiant d'une opération.
-	 * @return CompteTier trouvé.
+	 * @return operation trouvé.
 	 */
 	public Operation getOperationById(Long id);
 
@@ -161,4 +173,51 @@ public interface ServiceCompte {
 	public boolean PointerSurOperation(Long id);
 	
 	
+	/**
+	 * Obtient un Prelevement.
+	 * @param id identifiant d'un Prelevement.
+	 * @return Prelevement trouvé.
+	 */
+	public Prelevement getPrelevementById(Long id);
+
+	/**
+	 * Enregistre un Prelevement.
+	 * @param operation objet Prelevement.
+	 * @return l'operation mise à jour.
+	 */
+	public Prelevement savePrelevement(Prelevement prelevement) throws IllegalArgumentException ;
+
+	/**
+	 * Suppprime un Prelevement à partir de son id.
+	 * @param id identifiant du Prelevement.
+	 */
+	public boolean deletePrelevement(Long id);
+
+	/**
+	 * Effectue une oppositions sur un Prelevement.
+	 * @param id identifiant du Prelevement.
+	 * @return True si opposition effectué.
+	 */
+	public boolean OppositionSurPrelevement(Long id);
+
+	/**
+	 * Recherche de la liste des virements à appliquer.
+	 * @param date Date d'applications.
+	 * @return Liste de virement.
+	 */
+	 Set<Virement> GetVirementApplicable(Date date);
+
+	 /**
+	  * Recherche la liste des prelevements à appliquer. 
+	  * @param date date d'application.
+	  * @return liste des prélévements
+	  */
+	 Set<Prelevement> GetPrelevementApplicable(Date date);
+
+	 /**
+	  * Creation d'opération à partir d'un prélévement
+	  * @param p Prélevement
+	  */
+	 void saveOperation(Prelevement p);
+
 }

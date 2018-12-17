@@ -1,5 +1,8 @@
 package fr.bicomat.Service;
 
+import java.util.Date;
+import java.util.Set;
+
 import org.springframework.stereotype.Service;
 
 import fr.bicomat.Auth.entities.User_App;
@@ -103,7 +106,12 @@ public interface ClientService {
 	 * @param id identifiant du  Carte bancaire.
 	 */
 	public boolean deleteCarteBancaire(Integer id);
-	
+	 /**
+	  * Recherche la liste des alertes.
+	  * @param date date d'applications
+	  * @return La liste des alertes
+	  */
+	 Set<Alerte> GetAlertetApplicable(Date date);
 	
 
 }

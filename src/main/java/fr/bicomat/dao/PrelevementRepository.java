@@ -7,11 +7,11 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
-import fr.bicomat.entities.Virement;
+import fr.bicomat.entities.Prelevement;
+
 
 @Repository
-public interface VirementRepository extends JpaRepository<Virement, Long> {
-	
-	@Query("select v from Virement v where v.dateEchance = ?")
-	 Set<Virement> findByDateEcheance(Date dateEchance);
+public interface PrelevementRepository extends JpaRepository<Prelevement, Long> {
+	@Query("select p from Prelevement p where p.dateEchance = ?")
+	 Set<Prelevement> findByDateEcheance(Date dateEchance);
 }

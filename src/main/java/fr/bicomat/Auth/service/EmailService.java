@@ -18,6 +18,7 @@ import org.springframework.stereotype.Component;
 
 import fr.bicomat.Auth.entities.EmailTemplate;
 import fr.bicomat.Auth.entities.User_App;
+import fr.bicomat.entities.Alerte;
 
 @Component
 public class EmailService {
@@ -74,6 +75,11 @@ public class EmailService {
 		helper.setText(message,true);
 
 		mailSender.send(mimeMessage);
+	}
+	
+	public void sendAlerte(Alerte a) {
+		// TODO Auto-generated method stub
+		
 	}	   
 
 }

@@ -8,14 +8,22 @@
 <meta name="viewport"
 	content="width=device-width, initial-scale=1.0,maximum-scale=1.0" />
 <title>Bicomat-Agency</title>
-<link rel="stylesheet" href="../css/bulma.min.css" />
-<link rel="shortcut icon" href="../images/fav_icon.png"
-	type="image/x-icon"/>
-<link rel="stylesheet" href="../css/mnu.css" />
+<link rel="stylesheet" href="../../css/font-awesome.min.css">
+<link href="../../css/fonts.googleapis.com.css" rel="stylesheet">
+<!-- Bulma Version 0.7.2-->
+<link rel="stylesheet" href="../../css/bulma.min.css" />
+<link rel="stylesheet" type="text/css" href="../../css/login.css">
+<link rel="stylesheet" type="text/css"
+	href="./../webjars/sweetalert2/6.2.1/dist/sweetalert2.css">
+<link rel="stylesheet" type="text/css" href="../../css/agency.css">
+<script src="./../webjars/jquery/3.1.1/jquery.js"></script>
+<script src="./../webjars/lodash/4.17.10/lodash.js"></script>
 
-<script defer src="../js/all.js"></script>
-<script src="webjars/jquery/3.1.1/jquery.min.js"></script>
-<script src="../js/mnuAgence.js"></script>
+<script src="./../webjars/sweetalert2/6.2.1/dist/sweetalert2.js"></script>
+<script src="../../js/clienthelper.js"></script>
+<script src="../../js/clientvalidate.js"></script>
+<script src="../../js/clientactions.js"></script>
+
 
 </head>
 <body>
@@ -32,14 +40,47 @@
 
 		<div id="navbarExampleTransparentExample" class="navbar-menu">
 			<div class="navbar-start">
-				<a class="navbar-item" th:href="@{/pages/users}"> Compte </a> <a
-					class="navbar-item" href="https://bulma.io/"> Carte & Services </a> <a
-					class="navbar-item" href="https://bulma.io/"> Epargne </a> <a
-					class="navbar-item" href="https://bulma.io/"> Credits </a><a
-					class="navbar-item" href="https://bulma.io/"> Assurances </a>
+				<a class="navbar-item"  href="/"> Carte & Services </a> <a
+					class="navbar-item" href="/"> Credits </a><a
+					class="navbar-item" href="/"> Assurances </a>
 				<div class="navbar-item has-dropdown is-hoverable">
-					<a class="navbar-link" href="/documentation/overview/start/">
-						Client </a>
+					<a class="navbar-link" href="/"> Compte </a>
+					<div class="navbar-dropdown">
+						<div class="navbar-item has-dropdown is-hoverable">
+							<a class="navbar-link" href="/"> Virements </a>
+							<div class="navbar-dropdown">
+								<a class="navbar-item" href="/newtiers"> entre mes Comptes</a> 
+								<a class="navbar-item" href="/newtiers"> vers un tiers</a> 
+								<a class="navbar-item" href="/newtiers"> Gestion de virements </a>
+								<a class="navbar-item" href="/newtiers"> Gestion des Bénéficaires </a> 
+							</div>
+							<a class="navbar-item" href="/newtiers"> Prélèvements</a> 
+							<a class="navbar-item" href="/newtiers"> Oppositions</a> 
+							<a class="navbar-item" href="/newtiers"> Alertes</a> 
+						</div>				
+					</div>
+				</div>
+				<div class="navbar-item has-dropdown is-hoverable">
+					<a class="navbar-link" href="/"> Epargne & Placements </a>
+					<div class="navbar-dropdown">
+						<div class="navbar-item has-dropdown is-hoverable">
+							<a class="navbar-link" href="/"> Virements </a>
+							<div class="navbar-dropdown">
+								<a class="navbar-item" href="/newtiers"> entre mes Comptes</a> 
+								<a class="navbar-item" href="/newtiers"> Gestion de virements </a>
+							</div>
+							<a class="navbar-link" href="/"> Virements permanents</a>
+							<div class="navbar-dropdown"> 
+								<a class="navbar-item" href="/newtiers"> Gestion de virements </a>
+							</div>
+							<a class="navbar-item" href="/newtiers"> Oppositions</a> 
+							<a class="navbar-item" href="/newtiers"> Alertes</a> 
+						</div>				
+					</div>
+				</div>
+			
+				<div class="navbar-item has-dropdown is-hoverable">
+					<a class="navbar-link" href="/"> Compte </a>
 					<div class="navbar-dropdown">
 						<a class="navbar-item" href="/newtiers"> Créer un Tiers </a> <a
 							class="navbar-item" href="/newconseiller"> Créer un Conseiller
@@ -62,7 +103,7 @@
 	</nav>
 
 
-	<section class="section">
+	<section class="section" id="accueil">
 		<div class="container has-text-centered">
 			<h1 th:inline="text">Bienvenue
 				[[${#httpServletRequest.remoteUser}]]!</h1>
@@ -72,6 +113,16 @@ client!!!!!
 		</div>
 	</section>
 
+<section class="section" id="virement_mes_comptes" >
+		<div class="container has-text-centered">
+			<h1 th:inline="text">Virement entre 2 comptes</h1>
+			<p>
+			<p>Vous pouvez accéder sur votre gestion de compte.</p>
+		</div>
+	</section>
+	
+	
+	
 	<footer class="footer">
 		<div class="container">
 			<div class="content has-text-centered">

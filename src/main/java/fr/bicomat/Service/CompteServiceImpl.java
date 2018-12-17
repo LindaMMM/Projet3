@@ -1,6 +1,7 @@
 package fr.bicomat.Service;
 
 import java.util.Date;
+import java.util.List;
 import java.util.Set;
 
 import javax.transaction.Transactional;
@@ -217,7 +218,10 @@ public class CompteServiceImpl implements CompteService {
 		// Création des opérations
 		Operation opDebit = new Operation(virement.getCompteByCompteCrediteur(), 0, now, virement.getMontant(), TypeOperation.CREDIT.getType());
 		Operation opcredit = new Operation(virement.getCompteByCompteDebiteur(), 0, now, virement.getMontant(), TypeOperation.DEBIT.getType());
-		this.saveOperation(opDebit);
+		if (virement.getCompteByCompteDebiteur().getTypeCompte()!= TypeCompte.CTIER.getType())
+		{
+			this.saveOperation(opDebit);
+		}
 		this.saveOperation(opcredit);
 		return virement;
 	}
@@ -343,18 +347,18 @@ public class CompteServiceImpl implements CompteService {
 
 	@Override
 	public Set<Virement> GetVirementApplicable(Date date) {
-		return virementRepository.findByDateEcheance(date);
+		return virementRepository.findByDateEcheanceAndActif(date, true);
 	}
 
 	@Override
 	public Set<Prelevement> GetPrelevementApplicable(Date date) {
-		return prelevementRepository.findByDateEcheance(date);
+		return prelevementRepository.findByDateEcheanceAndEtatPrelevement(date, EtatPrelevement.ACTIF.getEtat());
 	}
 
 	@Override
 	public void saveOperation(Prelevement p) {
 		Date now = new Date();
-		Operation opDebit = new Operation(p.getCompteByCompteDebiteur(), 0, now, p.getMontant(), TypeOperation.CREDIT.getType());
+		Operation opDebit = new Operation(p.getCompteByCompteDebiteur(), 0, now, p.getMontant(), TypeOperation.DEBIT.getType());
 		this.saveOperation(opDebit);		
 	}
 

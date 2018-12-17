@@ -19,7 +19,7 @@ import fr.bicomat.entities.Conseiller;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
-// @Transactional()
+
 public class ClientServiceTest {
 
 	@Autowired

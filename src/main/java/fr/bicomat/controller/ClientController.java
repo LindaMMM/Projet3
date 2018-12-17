@@ -5,14 +5,18 @@ import java.util.List;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import fr.bicomat.dao.AlerteRepository;
 import fr.bicomat.dao.ClientRepository;
 import fr.bicomat.dao.ConseillerRepository;
+import fr.bicomat.entities.Alerte;
 import fr.bicomat.entities.Client;
 import fr.bicomat.entities.Conseiller;
 
@@ -23,6 +27,7 @@ public class ClientController {
 	private ClientRepository clientRepository;
 	@Autowired
 	private ConseillerRepository conseillerRepository;
+	
 	
 /*	@RequestMapping(value="/saveInterne")
 	public String saveInterne(Model model,

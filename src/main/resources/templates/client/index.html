@@ -24,105 +24,106 @@
 <script src="../../js/clientvalidate.js"></script>
 <script src="../../js/clientactions.js"></script>
 
-
 </head>
 <body>
-	<nav class="navbar is-light ">
+	<!-- Debut Nav -->
+	<nav class="navbar" role="navigation" aria-label="main navigation">
 		<a class="navbar-item" href="#"> <img
 			src="../images/logo68_68.png" alt="Agency" width="112" height="28">
 		</a>
 		<div class="navbar-brand">
 			<div class="navbar-burger burger"
-				data-target="navbarExampleTransparentExample">
+				data-target="navbarClient">
 				<span></span> <span></span> <span></span>
 			</div>
 		</div>
-
-		<div id="navbarExampleTransparentExample" class="navbar-menu">
+				<div id="navbarClient" class="navbar-menu">
 			<div class="navbar-start">
-				<a class="navbar-item"  href="/"> Carte & Services </a> <a
-					class="navbar-item" href="/"> Credits </a><a
-					class="navbar-item" href="/"> Assurances </a>
-				<div class="navbar-item has-dropdown is-hoverable">
-					<a class="navbar-link" href="/"> Compte </a>
-					<div class="navbar-dropdown">
-						<div class="navbar-item has-dropdown is-hoverable">
-							<a class="navbar-link" href="/"> Virements </a>
-							<div class="navbar-dropdown">
-								<a class="navbar-item" href="/newtiers"> entre mes Comptes</a> 
-								<a class="navbar-item" href="/newtiers"> vers un tiers</a> 
-								<a class="navbar-item" href="/newtiers"> Gestion de virements </a>
-								<a class="navbar-item" href="/newtiers"> Gestion des Bénéficaires </a> 
-							</div>
-							<a class="navbar-item" href="/newtiers"> Prélèvements</a> 
-							<a class="navbar-item" href="/newtiers"> Oppositions</a> 
-							<a class="navbar-item" href="/newtiers"> Alertes</a> 
-						</div>				
-					</div>
-				</div>
-				<div class="navbar-item has-dropdown is-hoverable">
-					<a class="navbar-link" href="/"> Epargne & Placements </a>
-					<div class="navbar-dropdown">
-						<div class="navbar-item has-dropdown is-hoverable">
-							<a class="navbar-link" href="/"> Virements </a>
-							<div class="navbar-dropdown">
-								<a class="navbar-item" href="/newtiers"> entre mes Comptes</a> 
-								<a class="navbar-item" href="/newtiers"> Gestion de virements </a>
-							</div>
-							<a class="navbar-link" href="/"> Virements permanents</a>
-							<div class="navbar-dropdown"> 
-								<a class="navbar-item" href="/newtiers"> Gestion de virements </a>
-							</div>
-							<a class="navbar-item" href="/newtiers"> Oppositions</a> 
-							<a class="navbar-item" href="/newtiers"> Alertes</a> 
-						</div>				
-					</div>
-				</div>
-			
-				<div class="navbar-item has-dropdown is-hoverable">
-					<a class="navbar-link" href="/"> Compte </a>
-					<div class="navbar-dropdown">
-						<a class="navbar-item" href="/newtiers"> Créer un Tiers </a> <a
-							class="navbar-item" href="/newconseiller"> Créer un Conseiller
-						</a> <a class="navbar-item" href="/newinterne"> Créer un Interne </a>
-					</div>
-				</div>
+				<a class="navbar-item burger" id="navCompte"> Compte </a> <a
+					class="navbar-item burger" id="navCarte"> Carte & service </a> <a
+					class="navbar-item burger" id="navEpargne"> Epargne & Placements </a> <a
+					class="navbar-item burger" id="navCredit"> Credits </a> <a
+					class="navbar-item burger" id="navAssurance"> Assurances </a>
 
-				<div class="navbar-end">
-					<div class="navbar-item">
-						<div class="field">
-							<div class="control">
-								<form th:action="@{/logout}" method="post">
-									<input type="submit" value="Deconnexion" />
-								</form>
-							</div>
-						</div>
-					</div>
+			</div>
+			<div class="navbar-end burger">
+			<div class="navbar-item">
+				<div class="buttons">
+					<a class="button is-light" href="/logout"> <strong>Déconnexion</strong>
+					</a>
 				</div>
 			</div>
+		</div>
+		</div>
+
+		
+		</div>
 	</nav>
-
-
-	<section class="section" id="accueil">
+	<!-- Fin navigation -->
+	<div class="is-fullheight">
+	<!-- home -->
+	<div class="container panelagence" id="home">
+		<section class="section" id="accueil">
+			<div class="container has-text-centered">
+				<h1 th:inline="text">Bienvenue
+					[[${#httpServletRequest.remoteUser}]]!</h1>
+				client!!!!!
+				<p>
+				<p>Vous pouvez accéder sur votre gestion de compte.</p>
+			</div>
+		</section>
+	</div>
+<!-- Compte -->
+	<div class=" panelagence" id="compte">
+		<div class="columns">
+			<div class="column is-2 ">
+				<aside class="menu is-hidden-mobile">
+					<p class="menu-label">Virement</p>
+					<ul class="menu-list">
+						<li><a>entre mes comptes</a></li>
+						<li><a>vers un tiers</a></li>
+						<li><a>Consuler, Annuler, Modifier</a></li>
+						<li><a>Gérer bénéficiaire</a>
+							<ul>
+								<li><a>Lister</a></li>
+								<li><a>Créer</a></li>
+								<li><a>Modifier</a></li>
+								<li><a>Annuler</a></li>
+							</ul></li>
+					</ul>
+					<p class="menu-label">
+						<a id="loadprelevement">Prélèvemment</a>
+					</p>
+					<p class="menu-label" >
+						<a id="loadOpposition">Opposition</a>
+					</p>
+					<p class="menu-label">
+						<a id="loadAlerte">Alerte</a>
+					</p>
+					<p class="menu-label">
+						<a id="loadDocument" >Documents</a>
+					</p>
+				</aside>
+			</div>
+			<div class="column ">
 		<div class="container has-text-centered">
-			<h1 th:inline="text">Bienvenue
-				[[${#httpServletRequest.remoteUser}]]!</h1>
-client!!!!!
-			<p>
-			<p>Vous pouvez accéder sur votre gestion de compte.</p>
+			<h1 class="title" th:inline="text">Compte</h1>
+			<h2 class="subtitle" > Gestion de vos comptes</h2>
 		</div>
-	</section>
-
-<section class="section" id="virement_mes_comptes" >
-		<div class="container has-text-centered">
-			<h1 th:inline="text">Virement entre 2 comptes</h1>
-			<p>
-			<p>Vous pouvez accéder sur votre gestion de compte.</p>
+	
+				<section class="section Toload" id="compteLoad">
+					
+				</section>
+			</div>
 		</div>
-	</section>
+	</div>
+	<!-- epargne -->
 	
-	
-	
+	<div class=" panelagence" id="epargne"></div>
+	<div class=" panelagence" id="cartes"></div>
+	<div class=" panelagence" id="assurance"></div>
+	<div class=" panelagence" id="credit"></div>
+</div>
 	<footer class="footer">
 		<div class="container">
 			<div class="content has-text-centered">
@@ -136,6 +137,5 @@ client!!!!!
 		</div>
 	</footer>
 	<script src="../js/bulma.js"></script>
-
 </body>
 </html>

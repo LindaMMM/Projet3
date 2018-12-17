@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<head>
+<title>Alerte</title>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" />
+<meta name="viewport"
+	content="width=device-width, initial-scale=1.0,maximum-scale=1.0" />
+
+<link rel="stylesheet" href="../css/bulma.min.css" />
+<script defer src="../js/all.js"></script>
+<link rel="shortcut icon" href="../images/fav_icon.png"
+	type="image/x-icon">
+</head>
+<body>
+	
+	<section class="section is-fullheight">
+		
+		<table border="1">
+			<thead>
+				<tr>
+					<th>Id</th>
+					<th>Titre</th>
+					<th>Date</th>
+					<th>Editer</th>
+					<th>Modifier</th>
+					<th>Suprimmer</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr th:each="alerte : ${page.content}">
+					<td th:text="${alerte.idalerte}"></td>
+					<td th:text="${alerte.titre}"></td>
+					<td th:text="${alerte.dateAlerte}"></td>
+					<td><a th:href="${'/client/alerte/' + alerte.idalerte}">View</a></td>
+					<td><a th:href="${'/client/alerte/edit/' + alerte.idalerte}">Edit</a></td>
+					<td><a th:href="${'/client/alerte/delete/' + alerte.idalerte}">Delete</a></td>
+				</tr>
+			</tbody>
+		</table>
+		<div class="pagination-div">
+			<span th:if="${page.hasPrevious()}"> <a
+				th:href="@{/client/alertes(page=${page.number-1},size=${page.size})}">Previous</a>
+			</span>
+			<th:block th:each="i: ${#numbers.sequence(0, page.totalPages - 1)}">
+				<span th:if="${page.number == i}" class="selected">[[${i}+1]]</span>
+				<span th:unless="${page.number == i}"> <a
+					th:href="@{/client/alertes(page=${i},size=${page.size})}">[[${i}+1]]</a>
+				</span>
+			</th:block>
+			<span th:if="${page.hasNext()}"> <a
+				th:href="@{/client/alertes(page=${page.number+1},size=${page.size})}">Next</a>
+			</span>
+		</div>
+	</section>
+
+</body>
+</html>

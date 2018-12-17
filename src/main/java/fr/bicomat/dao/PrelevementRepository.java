@@ -12,6 +12,6 @@ import fr.bicomat.entities.Prelevement;
 
 @Repository
 public interface PrelevementRepository extends JpaRepository<Prelevement, Long> {
-	@Query("select p from Prelevement p where p.dateEchance = ?")
+	@Query("select p from Prelevement p where p.dateEchance = ? and etatPrelevement = 'A'")
 	 Set<Prelevement> findByDateEcheance(Date dateEchance);
 }

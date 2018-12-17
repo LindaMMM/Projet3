@@ -2,6 +2,7 @@ package fr.bicomat.Validation;
 
 
 
+import java.util.Calendar;
 import java.util.Date;
 
 import org.hibernate.type.DateType;
@@ -52,12 +53,13 @@ public class CompteTierValidation {
 	 * Test si la demande à plus de 24 heures
 	 * @throws IllegalArgumentException refus d'activer un compte de moins de 24 heures.
 	 */
-	@SuppressWarnings("deprecation")
 	private void test24heure() throws IllegalArgumentException{
 		
-		Date hier = new Date();
-		hier.setDate(hier.getDate()-1);
-		if (comptetiers.getDateCreation().compareTo(hier)< 0) {
+		Date now = new Date();
+		Calendar cal = Calendar.getInstance();
+		cal.setTime(now);   
+		cal.add(Calendar.DAY_OF_YEAR, -1);
+		if (comptetiers.getDateCreation().compareTo(cal.getTime())< 0) {
 			throw new IllegalArgumentException("Le compte tier ne peut pas être activé");
 		}
 		

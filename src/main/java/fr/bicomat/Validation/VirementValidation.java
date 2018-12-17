@@ -1,5 +1,6 @@
 package fr.bicomat.Validation;
 
+import java.util.Calendar;
 import java.util.Date;
 
 import fr.bicomat.entities.CompteClient;
@@ -59,9 +60,12 @@ public class VirementValidation {
 		}
 		else {
 			// test des 15 jours avant 1er échéance
-			Date date15 = new Date();
-			date15.setDate(date15.getDate()+15);
-			if (virement.getDateEcheance().compareTo(date15)>0){
+			Date now = new Date();
+			Calendar cal = Calendar.getInstance();
+			cal.setTime(now);   
+			cal.add(Calendar.DAY_OF_YEAR, 15);
+
+			if (virement.getDateEcheance().compareTo(cal.getTime())>0){
 				throw new IllegalArgumentException("Un virement doit être positionner dans 15 jours minimum.");
 			}
 		}

@@ -12,6 +12,6 @@ import fr.bicomat.entities.Virement;
 @Repository
 public interface VirementRepository extends JpaRepository<Virement, Long> {
 	
-	@Query("select v from Virement v where v.dateEchance = ?")
+	@Query("select v from Virement v where v.dateEchance = ? and actif = 1")
 	 Set<Virement> findByDateEcheance(Date dateEchance);
 }

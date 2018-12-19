@@ -1,5 +1,7 @@
 package fr.bicomat.Service;
 
+import java.util.List;
+
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,10 +10,13 @@ import org.springframework.stereotype.Service;
 import fr.bicomat.Auth.entities.User_App;
 import fr.bicomat.Auth.service.UserService;
 import fr.bicomat.dao.BanqueRepository;
-
+import fr.bicomat.dao.CarteBancaireRepository;
+import fr.bicomat.dao.ClientRepository;
 import fr.bicomat.dao.ConseillerRepository;
 import fr.bicomat.dao.InfoCompteRepository;
 import fr.bicomat.entities.Banque;
+import fr.bicomat.entities.CarteBancaire;
+import fr.bicomat.entities.Client;
 import fr.bicomat.entities.Conseiller;
 import fr.bicomat.entities.InfoCompte;
 
@@ -27,9 +32,14 @@ public class BanqueServiceImpl implements  BanqueService{
 	
 	@Autowired
 	InfoCompteRepository infoCompteRepository;
+	@Autowired
+	ClientRepository clientRepository;
 	
 	@Autowired
 	UserService serviceUser;
+	@Autowired
+	CarteBancaireRepository carteBancaireRepository;
+	
 	
 	@Override
 	public Banque getBanqueById(Integer id) {
@@ -82,5 +92,25 @@ public class BanqueServiceImpl implements  BanqueService{
 	public boolean deleteInfoCompte(Integer id) {
 		infoCompteRepository.deleteById(id);
 		return true;
+	}
+	/*
+	 * ADIENG
+	 * 
+	 */
+	@Override
+	public List<Client> getClientByNom(String nom) {
+		return (List<Client>) clientRepository.chercherByNom(nom);
+	}
+	@Override
+	public CarteBancaire getCarteNumcarte (String numcarte) {
+		return carteBancaireRepository.findByNumcarte(numcarte);
+	}
+	@Override
+	public List<Client> getClientByCarte(CarteBancaire carte) {
+		return (List<Client>) clientRepository.findByCarteBancaires(carte);
+	}
+	@Override
+	public CarteBancaire getCarteByClient(Client client) {
+		return carteBancaireRepository.findByClient(client);
 	}
 }

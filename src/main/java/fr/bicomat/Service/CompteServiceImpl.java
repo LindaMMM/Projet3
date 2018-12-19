@@ -1,5 +1,9 @@
 package fr.bicomat.Service;
 
+import java.util.Date;
+import java.util.List;
+import java.util.Set;
+
 import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -8,19 +12,26 @@ import fr.bicomat.Validation.OperationValidation;
 import fr.bicomat.Validation.VirementValidation;
 import fr.bicomat.dao.CompteClientRepository;
 import fr.bicomat.dao.CompteTiersRepository;
+import fr.bicomat.dao.InfoCompteRepository;
 import fr.bicomat.dao.OperationRepository;
+import fr.bicomat.dao.PrelevementRepository;
 import fr.bicomat.dao.VirementRepository;
+import fr.bicomat.entities.Alerte;
 import fr.bicomat.entities.CompteClient;
 import fr.bicomat.entities.CompteTiers;
 import fr.bicomat.entities.EtatCompte;
 import fr.bicomat.entities.EtatDecouvert;
+import fr.bicomat.entities.EtatPrelevement;
 import fr.bicomat.entities.Operation;
+import fr.bicomat.entities.Prelevement;
+import fr.bicomat.entities.TypeCompte;
 import fr.bicomat.entities.TypeOperation;
+import fr.bicomat.entities.TypeVirement;
 import fr.bicomat.entities.Virement;
 
 @Service
 @Transactional(rollbackOn = {Exception.class})
-public class ServiceCompteImpl implements ServiceCompte {
+public class CompteServiceImpl implements CompteService {
 
 	@Autowired
 	CompteClientRepository compteclientRepository;
@@ -33,7 +44,13 @@ public class ServiceCompteImpl implements ServiceCompte {
 
 	@Autowired
 	OperationRepository operationRepository;
+	
+	@Autowired
+	PrelevementRepository prelevementRepository;
 
+	@Autowired
+	InfoCompteRepository infoCompteRepository;
+	
 	@Override
 	public CompteClient getCompteClientById(Integer id) {
 		return compteclientRepository.getOne(id);
@@ -44,8 +61,14 @@ public class ServiceCompteImpl implements ServiceCompte {
 
 		if(compteClient.getIdcompte()==null)
 		{
-			// CompteClientValidation.checkNewCompteClient(compteClient);
-			
+			TypeCompte type = TypeCompte.fromString(compteClient.getTypeCompte());
+			compteClient.setInfoCompte(infoCompteRepository.findByCodeInfo(type.getType()));
+
+			new CompteClientValidation(compteClient).validInsert();
+		}
+		else
+		{
+			new CompteClientValidation(compteClient).validUpdate();
 		}
 		return compteclientRepository.save(compteClient);
 	}
@@ -72,8 +95,16 @@ public class ServiceCompteImpl implements ServiceCompte {
 		if (cptClient != null)
 		{
 			cptClient.setEtatCompte(EtatCompte.FERMER.getEtat());
-			double solde =  cptClient.getSolde() + CompteClientValidation.CalculCloture(cptClient);
-			cptClient.setSolde(solde); 
+			CompteClientValidation cmpValidation = new CompteClientValidation(cptClient);
+			cmpValidation.calculerCloture();
+			Date now = new Date();
+			Operation opInteret = new Operation(cptClient, 0, now, cmpValidation.getMontantInteret(), TypeOperation.CREDIT.getType());
+			Operation opImpot = new Operation(cptClient, 0, now, cmpValidation.getMontantImpot(), TypeOperation.DEBIT.getType());
+			cptClient.getOperations().add(opInteret);
+			cptClient.getOperations().add(opImpot);
+			// Save data operation
+			this.saveOperation(opImpot);
+			this.saveOperation(opInteret);
 			return compteclientRepository.saveAndFlush(cptClient) != null;
 		}
 		return false;
@@ -164,17 +195,35 @@ public class ServiceCompteImpl implements ServiceCompte {
 
 	@Override
 	public Virement saveVirement(Virement virement) throws IllegalArgumentException {
-
+		VirementValidation validVirement = new VirementValidation(virement);
 		if (virement.getIdvirement()==null)
 		{
-			VirementValidation.checkNewVirement(virement);
+			Date now = new Date();
+			validVirement.validInsert();
+			if (virement.getTypeVirement().equals(TypeVirement.PONCTUEL.getType()) && virement.getDateEcheance().compareTo(new Date()) == 0) {
+				saveOperation(virement);
+			}
 		}
 		else
 		{
-			VirementValidation.checkUpdateVirement(virement);
+			validVirement.validUpdate();
 		}
 
 		return virementRepository.saveAndFlush(virement);
+	}
+
+	@Override
+	public Virement saveOperation(Virement virement) throws IllegalArgumentException {
+		Date now = new Date();
+		// Création des opérations
+		Operation opDebit = new Operation(virement.getCompteByCompteCrediteur(), 0, now, virement.getMontant(), TypeOperation.CREDIT.getType());
+		Operation opcredit = new Operation(virement.getCompteByCompteDebiteur(), 0, now, virement.getMontant(), TypeOperation.DEBIT.getType());
+		if (virement.getCompteByCompteDebiteur().getTypeCompte()!= TypeCompte.CTIER.getType())
+		{
+			this.saveOperation(opDebit);
+		}
+		this.saveOperation(opcredit);
+		return virement;
 	}
 
 	@Override
@@ -201,10 +250,9 @@ public class ServiceCompteImpl implements ServiceCompte {
 
 	@Override
 	public Operation saveOperation(Operation operation) throws IllegalArgumentException {
+		OperationValidation validop = new OperationValidation(operation); 
 		if (operation.getId() == null)
 		{
-			OperationValidation.checkNewOperation(operation);
-
 			// Mise à jour du compte
 			if(operation.getCompte() instanceof CompteClient)
 			{
@@ -219,10 +267,11 @@ public class ServiceCompteImpl implements ServiceCompte {
 				}
 				((CompteClient)operation.getCompte()).setSolde(solde);
 			}
+			validop.validInsert();
 		}
 		else
 		{
-			OperationValidation.checkUpdateOpration(operation);
+			validop.validUpdate();
 		}
 		return operationRepository.saveAndFlush(operation);
 	}
@@ -271,5 +320,50 @@ public class ServiceCompteImpl implements ServiceCompte {
 		}
 		return false;
 	}
+
+	@Override
+	public Prelevement getPrelevementById(Long id) {
+		return prelevementRepository.getOne(id);
+	}
+
+	@Override
+	public Prelevement savePrelevement(Prelevement prelevement) throws IllegalArgumentException {
+		return prelevementRepository.saveAndFlush(prelevement);
+	}
+
+	@Override
+	public boolean deletePrelevement(Long id) {
+		prelevementRepository.deleteById(id);
+		return false;
+	}
+
+	@Override
+	public boolean OppositionSurPrelevement(Long id) {
+		Prelevement prelevement = getPrelevementById(id); 
+		prelevement.setEtatPrelevement(EtatPrelevement.DEMANDE_OPPOSITION.getEtat());
+		this.savePrelevement(prelevement);
+		return true;
+	}
+
+	@Override
+	public Set<Virement> GetVirementApplicable(Date date) {
+		return virementRepository.findByDateEcheanceAndActif(date, true);
+	}
+
+	@Override
+	public Set<Prelevement> GetPrelevementApplicable(Date date) {
+		return prelevementRepository.findByDateEcheanceAndEtatPrelevement(date, EtatPrelevement.ACTIF.getEtat());
+	}
+
+	@Override
+	public void saveOperation(Prelevement p) {
+		Date now = new Date();
+		Operation opDebit = new Operation(p.getCompteByCompteDebiteur(), 0, now, p.getMontant(), TypeOperation.DEBIT.getType());
+		this.saveOperation(opDebit);		
+	}
+
+	
+
+	
 
 }

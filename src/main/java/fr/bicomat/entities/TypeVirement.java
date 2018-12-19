@@ -74,4 +74,18 @@ public enum TypeVirement {
 	public String getName(){
 		return this.name();
 	}
+
+	/**
+	 * D'une chaine Obtient le type de virement
+	 * @param text correspondant au type
+	 * @return Le type trouvée.
+	 */
+	public static TypeVirement fromString(String text) {
+	    for (TypeVirement b : TypeVirement.values()) {
+	      if (b.code.equalsIgnoreCase(text)) {
+	        return b;
+	      }
+	    }
+	    return null;
+	  }
 }

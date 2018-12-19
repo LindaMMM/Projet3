@@ -73,4 +73,18 @@ public enum TypeCompte {
 	public String getName(){
 		return this.name();
 	}
+	
+	/**
+	 * D'une chaine Obtient le type de compte
+	 * @param text correspondant au type
+	 * @return Le type trouvée.
+	 */
+	public static TypeCompte fromString(String text) {
+	    for (TypeCompte b : TypeCompte.values()) {
+	      if (b.type.equalsIgnoreCase(text)) {
+	        return b;
+	      }
+	    }
+	    return null;
+	  }
 }

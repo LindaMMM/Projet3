@@ -153,7 +153,7 @@ public class Client implements java.io.Serializable {
 		this.telPortable = telPortable;
 	}
 
-	@Column(name = "typeClient", length = 10)
+	@Column(name = "typeClient", length = 20)
 	public String getTypeClient() {
 		return this.typeClient;
 	}

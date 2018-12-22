@@ -2,6 +2,8 @@ package fr.bicomat.Service;
 
 import static org.junit.Assert.*;
 
+import java.util.List;
+
 import javax.transaction.Transactional;
 
 import org.junit.Test;
@@ -11,10 +13,11 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import fr.bicomat.entities.Banque;
+import fr.bicomat.entities.Client;
 import fr.bicomat.entities.Conseiller;
 @RunWith(SpringRunner.class)
 @SpringBootTest
-
+@Transactional
 public class ServiceBanqueTest {
 
 	@Autowired
@@ -33,14 +36,10 @@ public class ServiceBanqueTest {
 		assertNotNull(bankGet);
 	}
 
-
-
 	@Test
 	public void testGetConseillerById() {
 		Conseiller conseil = new Conseiller("nomConseil","PrenomConseil");
-	
-
-		Conseiller conseilupadte = banqueService.saveConseillier(conseil);
+			Conseiller conseilupadte = banqueService.saveConseillier(conseil);
 		assertFalse(conseilupadte.getIdconseil()==null);
 		Integer id =  conseilupadte.getIdconseil();
 		Conseiller conseilGet = banqueService.getConseillerById(id);
@@ -50,8 +49,7 @@ public class ServiceBanqueTest {
 
 	@Test
 	public void testDeleteConseillier() {
-		Conseiller conseillier = new Conseiller("Todelete","Todelet");
-		
+		Conseiller conseillier = new Conseiller("Todelete","Todelet");	
 		Conseiller conseilupadte = banqueService.saveConseillier(conseillier);
 		assertFalse(conseilupadte.getIdconseil() == null);
 		Integer id =  conseilupadte.getIdconseil();
@@ -64,6 +62,14 @@ public class ServiceBanqueTest {
 		Conseiller conseillier = banqueService.getConseillerById(1);
 	
 		assertNotNull(banqueService.AjouterCompteAgencyConseillier(conseillier,"email@agency.com","conseiller"));
+	}
+	
+	@Test
+	public void testGetClientBy() {
+		
+		List<Client> lstClient = banqueService.getClientByNom("");
+	
+		assertNotNull(lstClient);
 	}
 
 }

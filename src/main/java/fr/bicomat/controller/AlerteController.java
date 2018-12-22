@@ -9,7 +9,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import fr.bicomat.Auth.entities.User_App;
 import fr.bicomat.dao.AlerteRepository;
 import fr.bicomat.entities.Alerte;
 
@@ -44,16 +43,4 @@ public class AlerteController {
 		model.addAttribute("alerte", new Alerte());
 		return "client/alerteform";
 	}
-
-	/*@RequestMapping(value = "/admin", method = RequestMethod.POST)
-	public String saveProduct(User_App user) {
-		userService.saveUser(user);
-		return "redirect:/client/alerte/" + user.getId();
-	}*/
-
-	/*@RequestMapping(value = "/admin/delete/{id}", method = RequestMethod.GET)
-	public String delete(@PathVariable Integer id) {
-		userService.deleteUser(id);
-		return "redirect:/admin/users";
-	}*/
 }

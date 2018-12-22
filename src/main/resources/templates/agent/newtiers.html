@@ -16,57 +16,57 @@
                    
                     <div class="box">
                        <form th:action="@{saveTiers}" method="post">
-                        	<div class="field is-horizontal">
-		  					 	<div class="field-label is-normal">
-									    <label class="label">Nom</label>
-								 </div>
-							 <div class="field-body">
-							    <div class="field">
-							      <div class="control">
-							        <input class="input" type="text" placeholder="Nom" name="nom">
-		  								<span class="input is-danger" th:errors="${tiers.nom}"></span>
-							      </div>
-							    </div>
-							  </div>
-				   			 </div>
-				   			 <div class="field is-horizontal">
-		  					 		<div class="field-label is-normal">
-									    <label class="label">Prénom</label>
-								 	</div>
-							 		<div class="field-body">
-									    <div class="field">
-									      <div class="control">
-									        <input class="input" type="text" placeholder="Prénom" name="prenom">
-		  									<span class="input is-danger" th:errors="${tiers.prenom}"></span>
-									      </div>
-									    </div>
-							       </div>
-				   			 </div>
-				   			 	<div class="field is-horizontal">
-		  					 		<div class="field-label is-normal">
-									    <label class="label">@Email</label>
-								 	</div>
-							 		<div class="field-body">
-									    <div class="field">
-									      <div class="control">
-									        <input class="input"  type="email" placeholder="@Email" name="adressmail">
-		  									<span class="input is-danger" th:errors="${tiers.adressmail}"></span>
-									      </div>
-									    </div>
-							       </div>
-				   			 </div>
-				   		
-					  			<br>
-					  			<br>
+                            <div class="field is-horizontal">
+                                   <div class="field-label is-normal">
+                                        <label class="label">Nom</label>
+                                 </div>
+                             <div class="field-body">
+                                <div class="field">
+                                  <div class="control">
+                                    <input class="input" type="text" placeholder="Nom" name="nom">
+                                          <span class="input is-danger" th:errors="${tiers.nom}"></span>
+                                  </div>
+                                </div>
+                              </div>
+                                </div>
+                                <div class="field is-horizontal">
+                                       <div class="field-label is-normal">
+                                        <label class="label">Prénom</label>
+                                     </div>
+                                     <div class="field-body">
+                                        <div class="field">
+                                          <div class="control">
+                                            <input class="input" type="text" placeholder="Prénom" name="prenom">
+                                              <span class="input is-danger" th:errors="${tiers.prenom}"></span>
+                                          </div>
+                                        </div>
+                                   </div>
+                                </div>
+                                    <div class="field is-horizontal">
+                                       <div class="field-label is-normal">
+                                        <label class="label">@Email</label>
+                                     </div>
+                                     <div class="field-body">
+                                        <div class="field">
+                                          <div class="control">
+                                            <input class="input"  type="email" placeholder="@Email" name="adressmail">
+                                              <span class="input is-danger" th:errors="${tiers.adressmail}"></span>
+                                          </div>
+                                        </div>
+                                   </div>
+                                </div>
+                           
+                                  <br>
+                                  <br>
                              <div class="field is-grouped">
-					  			<div class="control">
-					    		 	<button class="button is-info">Enregistrer</button>
-					  			</div>
-					  			
-					  			 <div class="control">
-					    			<button class="button is-danger">Annuler</button>
-					  			</div>
-							</div>
+                                  <div class="control">
+                                     <button class="button is-info">Enregistrer</button>
+                                  </div>
+                                  
+                                   <div class="control">
+                                    <button class="button is-danger">Annuler</button>
+                                  </div>
+                            </div>
                         </form>
                     </div>
               

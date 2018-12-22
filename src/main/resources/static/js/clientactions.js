@@ -29,7 +29,18 @@ $(document).ready(function() {
 		chargerPage("/client/alertes","#compteLoad");
 	});
 	
-	
+	$("#loadAlerte").on("click",function(){
+		chargerPage("/client/prelevement","#compteLoad");
+	});
+	$("#loadprelevement").on("click",function(){
+		chargerPage("/client/prelevement","#compteLoad");
+	});
+	$("#loadOpposition").on("click",function(){
+		chargerPage("/client/prelevement","#compteLoad");
+	});
+	$("#loadDocument").on("click",function(){
+		chargerPage("/client/prelevement","#compteLoad");
+	});
 	
 	afficherConteneur("#home");
 });

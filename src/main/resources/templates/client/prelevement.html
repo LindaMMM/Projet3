@@ -28,39 +28,7 @@
 		<div class="card-content">
 			<div class="content">
 				<div class="control has-icons-left has-icons-right">
-					<table class="table is-responsive">
-						<thead>
-							<tr>
-								<th>Id</th>
-								<th>Titre</th>
-								<th>Date</th>
-
-							</tr>
-						</thead>
-						<tbody>
-							<tr th:each="alerte : ${page.content}">
-								<td th:text="${alerte.idalerte}"></td>
-								<td th:text="${alerte.titre}"></td>
-								<td th:text="${alerte.dateAlerte}"></td>
-
-							</tr>
-						</tbody>
-					</table>
-					<div class="pagination-div">
-						<span th:if="${page.hasPrevious()}"> <a
-							th:href="@{/client/alertes(page=${page.number-1},size=${page.size})}">Previous</a>
-						</span>
-						<th:block
-							th:each="i: ${#numbers.sequence(0, page.totalPages - 1)}">
-							<span th:if="${page.number == i}" class="selected">[[${i}+1]]</span>
-							<span th:unless="${page.number == i}"> <a
-								th:href="@{/client/alertes(page=${i},size=${page.size})}">[[${i}+1]]</a>
-							</span>
-						</th:block>
-						<span th:if="${page.hasNext()}"> <a
-							th:href="@{/client/alertes(page=${page.number+1},size=${page.size})}">Next</a>
-						</span>
-					</div>
+ <h1 class="title" th:inline="text">En construction</h1>
 				</div>
 			</div>
 		</div>

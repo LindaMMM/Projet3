@@ -10,8 +10,10 @@ import fr.bicomat.entities.CarteBancaire;
 import fr.bicomat.entities.Client;
 @Repository
 public interface ClientRepository extends JpaRepository<Client, Integer> {
+	
 	@Query("select c from Client c where c.nomClient like  ?1%")
 	List<Client> chercherByNom(String nom);
+	
 	List<Client> findByCarteBancaires(CarteBancaire carte);
 	
 	

@@ -107,7 +107,7 @@ public class BanqueServiceImpl implements  BanqueService{
 	}
 	@Override
 	public List<Client> getClientByCarte(CarteBancaire carte) {
-		return (List<Client>) clientRepository.findByCarteBancaires(carte);
+		return clientRepository.findByCarteBancaires(carte);
 	}
 	@Override
 	public CarteBancaire getCarteByClient(Client client) {

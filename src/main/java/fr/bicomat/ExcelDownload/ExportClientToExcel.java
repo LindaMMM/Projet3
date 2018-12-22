@@ -16,12 +16,24 @@ import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
 import fr.bicomat.entities.Client;
+/**
+ * Export d'un liste de client.
+ */
+public final class ExportClientToExcel {
 
-
-
-
-public class ExportClientToExcel {
+	/**
+	 *  construct par défaut.
+	 */
+	private ExportClientToExcel() {
+		
+	}
 	
+	/**
+	 * Obtient un classeur excel. 
+	 * @param clients Liste des clients
+	 * @return Le classeur.
+	 * @throws IOException en cas de pb.
+	 */
 	public static ByteArrayInputStream clientsToExcel(List<Client> clients) throws IOException {
 		String[] COLUMNs = {"Id", "Nom", "Prénom", "Adresse"};
 		try(
@@ -58,10 +70,7 @@ public class ExportClientToExcel {
 				row.createCell(1).setCellValue(client.getNomClient());
 				row.createCell(2).setCellValue(client.getPrenomClient());
 				row.createCell(3).setCellValue(client.getAdresse());
-				
-
 			}
-	 
 			workbook.write(out);
 			return new ByteArrayInputStream(out.toByteArray());
 		}

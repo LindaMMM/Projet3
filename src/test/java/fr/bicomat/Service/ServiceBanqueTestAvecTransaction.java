@@ -16,7 +16,6 @@ import fr.bicomat.entities.Client;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
-
 public class ServiceBanqueTestAvecTransaction {
 	@Autowired
 	private BanqueService banqueService;
@@ -28,19 +27,6 @@ public class ServiceBanqueTestAvecTransaction {
 		assertFalse(bankupadte.getIdbanque() == null);
 		Integer id =  bankupadte.getIdbanque();
 		banqueService.deleteBank(id);
-		
-/*		CarteBancaire crt= banqueService.getCarteNumcarte("12345");
-		Client c =banqueService.getClientByCarte(crt);
-	
-		if (crt!=null) {
-		
-			System.out.println("Id: " + c.getIdclient());
-			System.out.println("Prenom: " + c.getPrenomClient());
-			System.out.println("Nom: " + 	c.getNomClient());
-		} else System.out.println("Cette carte n'existe pas  " + crt);
-	
-		*/
-	
 	}
 
 }

@@ -1,12 +1,12 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
-	xmlns:th="http://www.thymeleaf.org"
-	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+    xmlns:th="http://www.thymeleaf.org"
+    xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
 <head>
 <meta charset="utf-8" />
 <meta http-equiv="X-UA-Compatible" />
 <meta name="viewport"
-	content="width=device-width, initial-scale=1.0,maximum-scale=1.0" />
+    content="width=device-width, initial-scale=1.0,maximum-scale=1.0" />
 <title>Bicomat-Agency</title>
 <link rel="stylesheet" href="../../css/font-awesome.min.css">
 <link href="../../css/fonts.googleapis.com.css" rel="stylesheet">
@@ -14,7 +14,7 @@
 <link rel="stylesheet" href="../../css/bulma.min.css" />
 <link rel="stylesheet" type="text/css" href="../../css/login.css">
 <link rel="stylesheet" type="text/css"
-	href="./../webjars/sweetalert2/6.2.1/dist/sweetalert2.css">
+    href="./../webjars/sweetalert2/6.2.1/dist/sweetalert2.css">
 <link rel="stylesheet" type="text/css" href="../../css/agency.css">
 <script src="./../webjars/jquery/3.1.1/jquery.js"></script>
 <script src="./../webjars/lodash/4.17.10/lodash.js"></script>
@@ -26,116 +26,130 @@
 
 </head>
 <body>
-	<!-- Debut Nav -->
-	<nav class="navbar" role="navigation" aria-label="main navigation">
-		<a class="navbar-item" href="#"> <img
-			src="../images/logo68_68.png" alt="Agency" width="112" height="28">
-		</a>
-		<div class="navbar-brand">
-			<div class="navbar-burger burger"
-				data-target="navbarClient">
-				<span></span> <span></span> <span></span>
-			</div>
-		</div>
-				<div id="navbarClient" class="navbar-menu">
-			<div class="navbar-start">
-				<a class="navbar-item burger" id="navCompte"> Compte </a> <a
-					class="navbar-item burger" id="navCarte"> Carte & service </a> <a
-					class="navbar-item burger" id="navEpargne"> Epargne & Placements </a> <a
-					class="navbar-item burger" id="navCredit"> Credits </a> <a
-					class="navbar-item burger" id="navAssurance"> Assurances </a>
+    <!-- Debut Nav -->
+    <nav class="navbar" role="navigation" aria-label="main navigation">
+        <a class="navbar-item" href="#"> <img
+            src="../images/logo68_68.png" alt="Agency" width="112" height="28">
+        </a>
+        <div class="navbar-brand">
+            <div class="navbar-burger burger"
+                data-target="navbarClient">
+                <span></span> <span></span> <span></span>
+            </div>
+        </div>
+                <div id="navbarClient" class="navbar-menu">
+            <div class="navbar-start">
+                <a class="navbar-item burger" id="navCompte"> Compte </a> <a
+                    class="navbar-item burger" id="navCarte"> Carte & service </a> <a
+                    class="navbar-item burger" id="navEpargne"> Epargne & Placements </a> <a
+                    class="navbar-item burger" id="navCredit"> Credits </a> <a
+                    class="navbar-item burger" id="navAssurance"> Assurances </a>
 
-			</div>
-			<div class="navbar-end burger">
-			<div class="navbar-item">
-				<div class="buttons">
-					<a class="button is-light" href="/logout"> <strong>Déconnexion</strong>
-					</a>
-				</div>
-			</div>
-		</div>
-		</div>
+            </div>
+            <div class="navbar-end burger">
+            <div class="navbar-item">
+                <div class="buttons">
+                    <a class="button is-light" href="/logout"> <strong>Déconnexion</strong>
+                    </a>
+                </div>
+            </div>
+        </div>
+        </div>
 
-		
-		</div>
-	</nav>
-	<!-- Fin navigation -->
-	<div class="is-fullheight">
-	<!-- home -->
-	<div class="container panelagence" id="home">
-		<section class="section" id="accueil">
-			<div class="container has-text-centered">
-				<h1 th:inline="text">Bienvenue
-					[[${#httpServletRequest.remoteUser}]]!</h1>
-				client!!!!!
-				<p>
-				<p>Vous pouvez accéder sur votre gestion de compte.</p>
-			</div>
-		</section>
-	</div>
+        
+        </div>
+    </nav>
+    <!-- Fin navigation -->
+    <div class="is-fullheight">
+    <!-- home -->
+    <div class="container panelagence" id="home">
+        <section class="section" id="accueil">
+            <div class="container has-text-centered">
+                <h1 th:inline="text">Bienvenue
+                    [[${#httpServletRequest.remoteUser}]]!</h1>
+                client!!!!!
+                <p>
+                <p>Vous pouvez accéder sur votre gestion de compte.</p>
+            </div>
+        </section>
+    </div>
 <!-- Compte -->
-	<div class=" panelagence" id="compte">
-		<div class="columns">
-			<div class="column is-2 ">
-				<aside class="menu is-hidden-mobile">
-					<p class="menu-label">Virement</p>
-					<ul class="menu-list">
-						<li><a>entre mes comptes</a></li>
-						<li><a>vers un tiers</a></li>
-						<li><a>Consuler, Annuler, Modifier</a></li>
-						<li><a>Gérer bénéficiaire</a>
-							<ul>
-								<li><a>Lister</a></li>
-								<li><a>Créer</a></li>
-								<li><a>Modifier</a></li>
-								<li><a>Annuler</a></li>
-							</ul></li>
-					</ul>
-					<p class="menu-label">
-						<a id="loadprelevement">Prélèvemment</a>
-					</p>
-					<p class="menu-label" >
-						<a id="loadOpposition">Opposition</a>
-					</p>
-					<p class="menu-label">
-						<a id="loadAlerte">Alerte</a>
-					</p>
-					<p class="menu-label">
-						<a id="loadDocument" >Documents</a>
-					</p>
-				</aside>
-			</div>
-			<div class="column ">
-		<div class="container has-text-centered">
-			<h1 class="title" th:inline="text">Compte</h1>
-			<h2 class="subtitle" > Gestion de vos comptes</h2>
-		</div>
-	
-				<section class="section Toload" id="compteLoad">
-					
-				</section>
-			</div>
-		</div>
-	</div>
-	<!-- epargne -->
-	
-	<div class=" panelagence" id="epargne"></div>
-	<div class=" panelagence" id="cartes"></div>
-	<div class=" panelagence" id="assurance"></div>
-	<div class=" panelagence" id="credit"></div>
+    <div class=" panelagence" id="compte">
+        <div class="columns">
+            <div class="column is-2 ">
+                <aside class="menu is-hidden-mobile">
+                    <p class="menu-label">Virement</p>
+                    <ul class="menu-list">
+                        <li><a>entre mes comptes</a></li>
+                        <li><a>vers un tiers</a></li>
+                        <li><a>Consuler, Annuler, Modifier</a></li>
+                        <li><a>Gérer bénéficiaire</a></li>
+                    </ul>
+                    <p class="menu-label">
+                        <a id="loadprelevement">Prélèvemment</a>
+                    </p>
+                    <p class="menu-label" >
+                        <a id="loadOpposition">Opposition</a>
+                    </p>
+                    <p class="menu-label">
+                        <a id="loadAlerte">Alerte</a>
+                    </p>
+                    <p class="menu-label">
+                        <a id="loadDocument" >Documents</a>
+                    </p>
+                </aside>
+            </div>
+            <div class="column ">
+        <div class="container has-text-centered">
+            <h1 class="title" th:inline="text">Compte</h1>
+            <h2 class="subtitle" > Gestion de vos comptes</h2>
+        </div>
+    
+                <section class="section Toload" id="compteLoad">
+                    
+                </section>
+            </div>
+        </div>
+    </div>
+    <!-- epargne -->
+    
+    <div class=" panelagence" id="epargne">
+    <div class="container has-text-centered">
+            <h1 class="title" th:inline="text">epargne</h1>
+            <h2 class="subtitle" > En construction</h2>
+        </div>
+    </div>
+    <div class=" panelagence" id="cartes">
+    <div class="container has-text-centered">
+            <h1 class="title" th:inline="text">cartes</h1>
+            <h2 class="subtitle" > En construction</h2>
+        </div>
+    </div></div>
+    <div class=" panelagence" id="assurance">
+    <div class="container has-text-centered">
+            <h1 class="title" th:inline="text">assurance</h1>
+            <h2 class="subtitle" > En construction</h2>
+        </div>
+    </div></div>
+    <div class=" panelagence" id="credit">
+    <div class="container has-text-centered">
+            <h1 class="title" th:inline="text">credit</h1>
+            <h2 class="subtitle" > En construction</h2>
+        </div>
+    </div></div>
 </div>
-	<footer class="footer">
-		<div class="container">
-			<div class="content has-text-centered">
+    <footer class="footer">
+        <div class="container">
+            <div class="content has-text-centered">
 
-				<p>
-					<a> <img src="../images/logo.png" alt="Logo" width="128"
-						height="24">
-					</a>
-				</p>
-			</div>
-		</div>
-	</footer>
-	<script src="../js/bulma.js"></script>
+                <p>
+                    <a> <img src="../images/logo.png" alt="Logo" width="128"
+                        height="24">
+                    </a>
+                </p>
+            </div>
+        </div>
+    </footer>
+    <script src="../js/bulma.js"></script>
 </body>
 </html>

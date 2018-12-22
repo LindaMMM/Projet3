@@ -46,10 +46,7 @@ public class ScheduledTasksOperation {
 	 */
 	private static final Logger log = LoggerFactory.getLogger(ScheduledTasksOperation.class);
 
-	// @Scheduled(fixedRate = 5000)
-	
-	 @Scheduled(cron="0 30 17 * * ?")
-	// @Scheduled(fixedRate = 5000)
+	@Scheduled(cron="0 0 1 * * ?")
 	public void OperationPeriodique() throws ParseException {
 
 		log.debug("Lancement de la tâche Journalinière");
@@ -58,6 +55,7 @@ public class ScheduledTasksOperation {
 		lancementPrelevement(date);
 		alerte(date);
 	}
+	
 	/**
 	 * Traitement des lancements de virements.
 	 * @param date Date à prendre en compte

@@ -1,8 +1,12 @@
 package fr.bicomat.Service;
 
 
+import java.util.List;
+
 import fr.bicomat.Auth.entities.User_App;
 import fr.bicomat.entities.Banque;
+import fr.bicomat.entities.CarteBancaire;
+import fr.bicomat.entities.Client;
 import fr.bicomat.entities.Conseiller;
 import fr.bicomat.entities.InfoCompte;
 
@@ -78,5 +82,13 @@ public interface BanqueService {
 	 * @param id identifiant du infoCompte.
 	 */
 	public boolean deleteInfoCompte(Integer id);
+	/*
+	 * ADIENG
+	 */
+	
+	public List<Client> getClientByNom(String nom) ;
+	public CarteBancaire getCarteNumcarte (String numcarte);
+	public List<Client> getClientByCarte(CarteBancaire carte);
+	public CarteBancaire getCarteByClient(Client client);
 	
 }

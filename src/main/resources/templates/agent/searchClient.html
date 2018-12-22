@@ -24,7 +24,9 @@
 <script src="../../js/searchClient.js"></script>
 
 </head>
+
 <body>
+
 	<div class="tile is-parent">
 		<div class="columns">
 			<div class="column">
@@ -39,49 +41,135 @@
 			</div>
 		</div>
 	</div>
-	<section class="section is-fullheight">
-		<div class="container" id='aboutTitle'>
-			<h1 class="title">Recherche d'un client</h1>
+	<div class="navbar-end">
+		<div class="navbar-item">
+			<div class="field is-grouped">
+			 <form th:action="@{/download}" method="get" >
+								<p class="control">
+			  <div class="control">
+												    <button class="button is-info">Télécharger</button>
+												</div>
+								
 			
-		</div>
-
-		<div class="container">
-			<h2 class="title">
-				<strong>Applicatons</strong>.
-			</h2>
-			<div class="field">
-				<div class="control">
-					<form th:action="@{/agent/gesCompte}" method="post">
-						<input type="submit" value="Gestion de comptes" />
 					</form>
-				</div>
-			</div>
-	
+		
+		  </div>
 		</div>
-		<div class="container">	
-			<h2 class="title">
-				<strong>Liens</strong>.
-			</h2>
-			
-			<div id="recherche">
-				<div class="field">
-					
-					<div class="control">
-<a href="www.mabanque.com"> Ma Banque</a>
-							</div>
-				</div>
-			</div>
-		</div>
-		<div class="container" id="logout">	
-			<div class="field">
-				<div class="control">
-					<form th:action="@{/logout}" method="post">
-						<input type="submit" value="Retour à l'authentification" />
-					</form>
-				</div>
-			</div>
-		</div>
-	</section>
+	</div>
+	<br>
 
+    <div class="container">
+        <div class="columns">
+            <div class="column is-3 ">
+                <aside class="menu is-hidden-mobile">
+        
+                    <p class="menu-label">
+                        General
+                    </p>
+                    <ul class="menu-list">
+                        <li><a class="is-active">Bienvenue dans votre espace
+												[[${#httpServletRequest.remoteUser}]]</a></li>
+                       <br/>
+                                
+						<h2 class="subtitle">
+							Vous pouvez gérer vos <strong>besoin</strong>.
+						</h2>
+                        <li><a>Applications</a></li>
+          		
+			              <li><a>Lien</a></li>
+                    </ul>
+                    
+                </aside>
+            </div>
+            <div class="column is-9">
+                  <section class="hero is-info welcome is-small">
+                    <div class="hero-body">
+                        <div class="container">
+                            <h1 class="title">
+                                Recherche Client
+                            </h1>
+                            
+                        </div>
+                    </div>
+                </section>
+                               
+                    <div class="column is-13">
+                        <div class="card">
+                            <header class="card-header">
+                                <p class="card-header-title">
+                                    Rechercher par Carte ou par Nom
+                                </p>
+                                <a href="#" class="card-header-icon" aria-label="more options">
+                                     <span class="icon">
+                                        <i class="fa fa-angle-down" aria-hidden="true"></i>
+                                    </span>
+                                </a>
+                            </header>
+                            <div class="card-content">
+                                <div class="content">
+                                    <div class="control has-icons-left has-icons-right">
+                                    <form th:action="@{/agent/searchClient}" method="get">
+ 										<div class="field is-grouped">
+	     	  								<div class="control">
+									  			<label class="radio">
+									  				<input type="radio" name="reponse" value="yes">
+									     			Rechercher par Carte
+									  			</label>
+									  			<label class="radio">
+									    			<input type="radio" name="reponse" value="no">
+									     			Rechercher par Nom
+									  			</label>
+											</div>
+											<div class="field has-addons">
+											  <div class="control">
+											    <input class="input" type="text" placeholder="Chercher par carte ou par nom" name="chercher">
+											  </div>
+											   <div class="control">
+												    <button class="button is-info">Rechercher</button>
+												</div>
+												
+												
+											 
+											</div>
+										
+											
+										</div>
+            							
+            							<br>
+            							
+                                    </form>
+                     
+                       
+                                        <table class="table is-responsive">
+                                         <thead>
+                                        <tr>
+                                          <th><abbr title="Numéro Carte ">Id Client</abbr></th>
+                                          <th><abbr title="Nom ">Nom</abbr></th>
+                                          <th><abbr title="Prénom ">Prénom</abbr></th>
+                                          <th><abbr title="Adresse ">adresse</abbr></th>
+                                          </tr>
+                                      </thead>
+                                        <tbody>
+                                            
+                                               <tr th:each="c:${listClient}">
+                                                <td th:text="${c.idclient}"></td>
+                                                <td th:text="${c.nomClient}"></td>
+                                                <td th:text="${c.prenomClient}"></td>
+                                                <td th:text="${c.adresse}"></td>
+                                                </tr>
+                                        </tbody>
+                                       </table>
+                                      
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                     
+                    </div>
+                </div>
+            </div>
+        </div>
+   
+    <script async type="text/javascript" src="../js/bulma.js"></script>
 </body>
 </html>

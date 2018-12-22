@@ -18,9 +18,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
+<<<<<<< HEAD
+import fr.bicomat.Service.BanqueService;
+=======
 
+>>>>>>> 91673549724a46c4e409a58fd3d595e08ce5fc2f
 import fr.bicomat.Tasks.ScheduledTasksOperation;
 import fr.bicomat.config.CompteException;
+import fr.bicomat.entities.CarteBancaire;
 import fr.bicomat.entities.Client;
 import fr.bicomat.entities.Compte;
 import fr.bicomat.entities.Operation;
@@ -33,10 +38,18 @@ public class OperationRepositoryTest {
     private VirementRepository virementRepository;
 	@Autowired
     private OperationRepository operationRepository;
+<<<<<<< HEAD
+/*	@Autowired
+	private IBanqueService ibanqueService;*/
+	@Autowired
+	BanqueService banqueservice;
+
+=======
+>>>>>>> 91673549724a46c4e409a58fd3d595e08ce5fc2f
 	@Test
 	public void test() throws CompteException, Exception {
 		//Creation de virement
-		DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+/*		DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 		LocalDate localDate = LocalDate.now();
 	
 	/*	Client client =ibanqueService.getClientById(1);
@@ -54,7 +67,11 @@ public class OperationRepositoryTest {
       ibanqueService.saveOrUpdate(virement);
       */
       //Vérifie que le virement est créé
+<<<<<<< HEAD
+      /*  assertNotNull(virement.getIdvirement());
+=======
        /* assertNotNull(virement.getIdvirement());
+>>>>>>> 91673549724a46c4e409a58fd3d595e08ce5fc2f
         System.out.println("Quantity: " + cptdeb.getIdcompte());*/
      //  ibanqueService.loadOperationTemp(new SimpleDateFormat("yyyy-MM-dd HH:mm").parse("2018-12-15 10:00"), 1000, "P", cptdeb.getIdcompte(),virement.getIdvirement(),cptcred.getIdcompte());
    
@@ -76,8 +93,8 @@ System.out.println("================================");
 */
 	}
 
-
 	
+			
 
 
 }

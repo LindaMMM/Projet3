@@ -71,15 +71,19 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-devtools</artifactId>
 		</dependency>
-		<!--DIENG Framework Batch -->
+		<!--DIENG -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-batch</artifactId>
 		</dependency>
 
+			<dependency>
+			<groupId>org.apache.poi</groupId>
+			<artifactId>poi-ooxml</artifactId>
+			<version>3.17</version>
+		</dependency>
 
-
-		<!--DIENG Framework Batch end -->
+		<!--DIENG  -->
 		<!-- email -->
 		<dependency>
 			<groupId>commons-lang</groupId>

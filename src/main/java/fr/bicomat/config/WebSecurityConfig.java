@@ -50,30 +50,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	  	.usernameParameter("ssoId").passwordParameter("password")
 	  	.and().exceptionHandling().accessDeniedPage("/AccessDenied");
 		http.csrf().disable();
-	  	// .and().csrf().disable();
-	  	
-
-		/* http.authorizeRequests()
-		 	.antMatchers("/images/**","/js/**", "/css/**").permitAll()
-		  	.antMatchers("/", "/client/**").access("hasRole('CLIENT')")
-		  	.antMatchers("/agent/**").access("hasRole('AGENT')")
-		  	.antMatchers("/admin/**").access("hasRole('ADMIN')")
-		  	.and().formLogin().loginPage("/login").successHandler(customSuccessHandler)
-		  	.usernameParameter("ssoId").passwordParameter("password")
-		  	.and().csrf()
-		  	.and().exceptionHandling().accessDeniedPage("/AccessDenied");
-		 */
-       /* http
-            .authorizeRequests()
-                .antMatchers("/", "/pages/", "/home","/images/**","/js/**", "/css/**").permitAll()
-                .anyRequest().authenticated()
-                .and()
-            .formLogin()
-                .loginPage("/login")
-                .permitAll()
-                .and()
-            .logout()
-                .permitAll();*/
+	 
     }
 
 

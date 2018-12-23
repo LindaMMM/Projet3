@@ -2,12 +2,18 @@ package fr.bicomat;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+/**
+ * Classe de gestion des utilitaires pour l'application.
+ * @author linda
+ *
+ */
 public class Utils {
-	
-
-	
-	  // isValidEmailAddress: Check the email address is OK
-	  public static boolean isValidEmailAddress(String emailAddress) {
+  /**
+   * Valide la saisie d'un adresse mail.
+   * @param emailAddress chaine de cartactère
+   * @return true si c'est un mail.
+   */
+  public static boolean isValidEmailAddress(String emailAddress) {
 	    String emailRegEx;
 	    Pattern pattern;
 	    // Regex for a valid email address
@@ -20,6 +26,4 @@ public class Utils {
 	    }
 	    return true;
 	  }
-
-	
 }

@@ -33,3 +33,4 @@ on_failure: always
 
 # mvn install -DskipTests=true -Dmaven.javadoc.skip=true -B -V
 # mvn clean compile
+# mvn clean compile

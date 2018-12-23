@@ -1,11 +1,10 @@
 package fr.bicomat.Auth.controller;
 
-import java.util.List;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
+
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -13,23 +12,25 @@ import org.springframework.security.web.authentication.logout.SecurityContextLog
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-
-import com.fasterxml.jackson.databind.ObjectMapper;
 
 import fr.bicomat.Auth.entities.User_App;
 import fr.bicomat.Auth.service.UserService;
+import fr.bicomat.Service.BanqueService;
+import fr.bicomat.entities.CarteBancaire;
+
 import org.springframework.web.bind.annotation.PathVariable;
 
 @Controller
 public class UserController {
-	
+
 	@Autowired
 	private UserService userService;
-	
+	@Autowired
+	private BanqueService banqueservice;
+
+
 	@RequestMapping(value = { "/", "/home" }, method = RequestMethod.GET)
 	public String homePage(ModelMap model) {
 		model.addAttribute("user", getPrincipal());
@@ -37,13 +38,13 @@ public class UserController {
 	}
 
 	@RequestMapping(value = "/agent", method = RequestMethod.GET)
-	public String adminPage(ModelMap model) {
+	public String agentPage(ModelMap model) {
 		model.addAttribute("user", getPrincipal());
 		return "agent/index";
 	}
 
 	@RequestMapping(value = "/admin", method = RequestMethod.GET)
-	public String dbaPage(ModelMap model) {
+	public String adminPage(ModelMap model) {
 		model.addAttribute("user", getPrincipal());
 		return "admin/index";
 	}
@@ -79,26 +80,19 @@ public class UserController {
 		}
 		return userName;
 	}
-	
+
 	@RequestMapping(value = "/changedpassword", method = RequestMethod.GET)
 	public String changedPassword( Model model) {
 		model.addAttribute("user",userService.getUserByssoId(getPrincipal()));
 		return "changedpassword";
 	}
-	
+
 	@RequestMapping(value = "/resetPassword", method = RequestMethod.GET)
 	public String resetPassword( Model model) {
 		model.addAttribute("user",userService.getUserByssoId(getPrincipal()));
 		return "resetPassword";
 	}
-	
-	@RequestMapping(value = "/agent/gestCompte", method = RequestMethod.GET)
-	public String getGestCompteAgent(ModelMap model) {
-		model.addAttribute("user", getPrincipal());
-		return "agent/searchClient";
-	}
 
-	
 	/**
 	 * 
 	 * @param model
@@ -139,4 +133,7 @@ public class UserController {
 		userService.deleteUser(id);
 		return "redirect:/admin/users";
 	}
+	
+	
+			
 }

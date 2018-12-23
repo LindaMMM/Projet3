@@ -1,6 +1,7 @@
 package fr.bicomat.Service;
 
 import java.util.Date;
+import java.util.Set;
 
 import javax.transaction.Transactional;
 
@@ -131,5 +132,10 @@ public class ClientServiceImpl implements ClientService {
 	public boolean deleteCarteBancaire(Integer id) {
 		carteRepository.deleteById(id);
 		return true;
+	}
+	
+	@Override
+	public Set<Alerte> GetAlertetApplicable(Date date) {
+		return alerteRepository.findByDateAlerte(date);
 	}
 }

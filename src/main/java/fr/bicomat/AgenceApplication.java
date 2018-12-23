@@ -8,17 +8,33 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.scheduling.annotation.EnableScheduling;
 
-
-
-@EnableJpaRepositories(basePackages = {"fr.bicomat.dao","fr.bicomat.Auth.dao"})
+/**
+ * Lanceur de l'application.
+ * @author linda
+ *
+ */
+@EnableJpaRepositories(basePackages = {"fr.bicomat.dao", "fr.bicomat.Auth.dao"})
 @SpringBootApplication
 @EnableScheduling
 public class AgenceApplication {
 
-	private static final Logger log = LoggerFactory.getLogger(AgenceApplication.class);
+    /**
+     * Constructeur par défaut.
+     */
+    protected AgenceApplication() {	
+    }
 
-	public static void main(String[] args) {
-		SpringApplication.run(AgenceApplication.class, args);
-	}
+	/**
+	 * Instance de log de l'application.
+	 */
+    private static final Logger LOG = LoggerFactory.getLogger(AgenceApplication.class) ;
 
+    /**
+     * Main de l'application. 
+     * @param args argument de lancement.
+     */
+	public static void main(final String[] args) {
+        LOG.debug("Chargement de l'application");
+        SpringApplication.run(AgenceApplication.class, args) ;
+    }
 }

@@ -7,5 +7,10 @@ import fr.bicomat.entities.InfoCompte;
 
 @Repository
 public interface InfoCompteRepository extends JpaRepository<InfoCompte, Integer> {
-
+	/**
+	 * Obtient une infoCompte à partir de son code.
+	 * @param code Code du type de compte.
+	 * @return l'infocompte trouvé.
+	 */
+	InfoCompte findByCodeInfo (String codeinfo);
 }

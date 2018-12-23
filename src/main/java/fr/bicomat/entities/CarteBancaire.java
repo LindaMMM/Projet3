@@ -20,6 +20,8 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.persistence.UniqueConstraint;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import fr.bicomat.Auth.entities.UserQuestion;
 
 /**
@@ -107,7 +109,7 @@ public class CarteBancaire implements java.io.Serializable {
 	public void setTypecarte(String typecarte) {
 		this.typecarte = typecarte;
 	}
-
+	@JsonIgnore
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "id_client")
 	public Client getClient() {

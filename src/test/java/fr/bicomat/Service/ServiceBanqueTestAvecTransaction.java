@@ -11,10 +11,11 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import fr.bicomat.entities.Banque;
+import fr.bicomat.entities.CarteBancaire;
+import fr.bicomat.entities.Client;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
-
 public class ServiceBanqueTestAvecTransaction {
 	@Autowired
 	private BanqueService banqueService;
@@ -26,7 +27,6 @@ public class ServiceBanqueTestAvecTransaction {
 		assertFalse(bankupadte.getIdbanque() == null);
 		Integer id =  bankupadte.getIdbanque();
 		banqueService.deleteBank(id);
-	
 	}
 
 }

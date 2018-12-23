@@ -33,7 +33,7 @@ public abstract class Compte implements java.io.Serializable {
 	private Integer idcompte;
 	private Client client;
 	private String libelle;
-	private int numecompte;
+	private String numecompte;
 	private String etatCompte = EtatCompte.OUVERT.getCode();
 	private String typeCompte = TypeCompte.LIV_A.getType() ;
 
@@ -45,7 +45,7 @@ public abstract class Compte implements java.io.Serializable {
 	public Compte() {
 	}
 
-	public Compte(Client client, int numecompte) {
+	public Compte(Client client, String numecompte) {
 		this.client = client;
 		this.numecompte = numecompte;
 	}
@@ -105,12 +105,12 @@ public abstract class Compte implements java.io.Serializable {
 		this.typeCompte = typeCompte;
 	}
 	
-	@Column(name = "numecompte", nullable = false)
-	public int getNumecompte() {
+	@Column(name = "numecompte", nullable = false, length = 15)
+	public String getNumecompte() {
 		return this.numecompte;
 	}
 
-	public void setNumecompte(int numecompte) {
+	public void setNumecompte(String numecompte) {
 		this.numecompte = numecompte;
 	}
 

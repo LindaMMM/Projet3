@@ -23,17 +23,39 @@ import fr.bicomat.Auth.entities.UserQuestion;
 @Table(name = "user_question", uniqueConstraints = @UniqueConstraint(columnNames = "question"))
 public class UserQuestion implements java.io.Serializable {
 
+	/**
+	 * Identifiant de serialisation. 
+	 */
+	private static final long serialVersionUID = 1L;
+	
+	/**
+	 *  Id de la question.
+	 */
 	private Integer questionId;
+
+	/**
+	 * Libellé de la question.
+	 */
 	private String question;
 
+	/**
+	 * Construteur par défaut.
+	 */
 	public UserQuestion() {
 	}
 
+	/**
+	 * Constructeur.
+	 * @param question chaine représentant la question.
+	 */
 	public UserQuestion(String question) {
 		this.question = question;
 	}
 
-
+    /**
+     * Obtient l'id de la question.
+     * @return
+     */
 	@Id
 	@GeneratedValue(strategy = IDENTITY)
 
@@ -42,15 +64,26 @@ public class UserQuestion implements java.io.Serializable {
 		return this.questionId;
 	}
 
+	/**
+	 * Mise à jour de l'id de la question. 
+	 * @param questionId identifiant de la question.
+	 */
 	public void setQuestionId(Integer questionId) {
 		this.questionId = questionId;
 	}
-
+    /**
+     *  Obtient la question.	
+     * @return libellé de la question.
+     */
 	@Column(name = "question", unique = true, nullable = false, length = 80)
 	public String getQuestion() {
 		return this.question;
 	}
 
+	/**
+	 * Mise à jour de la question.
+	 * @param question libellé de la question.
+	 */
 	public void setQuestion(String question) {
 		this.question = question;
 	}

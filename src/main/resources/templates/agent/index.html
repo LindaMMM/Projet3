@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
-	xmlns:th="http://www.thymeleaf.org"
-	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+    xmlns:th="http://www.thymeleaf.org"
+    xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
 
 <head>
 <title>Reset password Agency</title>
@@ -15,7 +15,7 @@
 <link rel="stylesheet" href="../../css/bulma.min.css" />
 <link rel="stylesheet" type="text/css" href="../../css/login.css">
 <link rel="stylesheet" type="text/css"
-	href="./../webjars/sweetalert2/6.2.1/dist/sweetalert2.css">
+    href="./../webjars/sweetalert2/6.2.1/dist/sweetalert2.css">
 <link rel="stylesheet" type="text/css" href="../../css/agency.css">
 <script src="./../webjars/jquery/3.1.1/jquery.js"></script>
 <script src="./../webjars/lodash/4.17.10/lodash.js"></script>
@@ -25,66 +25,66 @@
 
 </head>
 <body>
-	<div class="tile is-parent">
-		<div class="columns">
-			<div class="column">
-				<figure class="image is-128x128">
-					<img src="/images/logo.png">
-				</figure>
-			</div>
-			<div class="column is-four-fifths">
-				<div class="tile is-child has-text-centered">
-					<p class="title">Espace Agent</p>
-				</div>
-			</div>
-		</div>
-	</div>
-	<section class="section is-fullheight">
-		<div class="container" id='aboutTitle'>
-			<h1 class="title">Bienvenue dans votre espace
-				[[${#httpServletRequest.remoteUser}]]</h1>
-			<h2 class="subtitle">
-				Vous pouvez gérer vos <strong>besoin</strong>.
-			</h2>
-		</div>
+    <div class="tile is-parent">
+        <div class="columns">
+            <div class="column">
+                <figure class="image is-128x128">
+                    <img src="/images/logo.png">
+                </figure>
+            </div>
+            <div class="column is-four-fifths">
+                <div class="tile is-child has-text-centered">
+                    <p class="title">Espace Agent</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <section class="section is-fullheight">
+        <div class="container" id='aboutTitle'>
+            <h1 class="title">Bienvenue dans votre espace
+                [[${#httpServletRequest.remoteUser}]]</h1>
+            <h2 class="subtitle">
+                Vous pouvez gérer vos <strong>besoin</strong>.
+            </h2>
+        </div>
 
-		<div class="container">
-			<h2 class="title">
-				<strong>Applicatons</strong>.
-			</h2>
-			<div class="field">
-				<div class="control">
-					<form th:action="@{/agent/gesCompte}" method="post">
-						<input type="submit" value="Gestion de comptes" />
-					</form>
-				</div>
-			</div>
-	
-		</div>
-		<div class="container">	
-			<h2 class="title">
-				<strong>Liens</strong>.
-			</h2>
-			
-			<div id="recherche">
-				<div class="field">
-					
-					<div class="control">
-<a href="www.mabanque.com"> Ma Banque</a>
-							</div>
-				</div>
-			</div>
-		</div>
-		<div class="container" id="logout">	
-			<div class="field">
-				<div class="control">
-					<form th:action="@{/logout}" method="post">
-						<input type="submit" value="Retour à l'authentification" />
-					</form>
-				</div>
-			</div>
-		</div>
-	</section>
+        <div class="container">
+            <h2 class="title">
+                <strong>Applicatons</strong>.
+            </h2>
+            <div class="field">
+                <div class="control">
+                    <form th:action="@{/agent/gesCompte}" method="get">
+                        <input type="submit" value="Gestion de comptes" />
+                    </form>
+                </div>
+            </div>
+    
+        </div>
+        <div class="container">    
+            <h2 class="title">
+                <strong>Liens</strong>.
+            </h2>
+            
+            <div id="recherche">
+                <div class="field">
+                    
+                    <div class="control">
+					<a href="www.mabanque.com"> Ma Banque</a>
+                            </div>
+                </div>
+            </div>
+        </div>
+        <div class="container" id="logout">    
+            <div class="field">
+                <div class="control">
+                    <form th:action="@{/logout}" method="post">
+                        <input type="submit" value="Retour à l'authentification" />
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
 
 </body>
 </html>

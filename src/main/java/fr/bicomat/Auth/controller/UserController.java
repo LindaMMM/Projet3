@@ -38,13 +38,13 @@ public class UserController {
 	}
 
 	@RequestMapping(value = "/agent", method = RequestMethod.GET)
-	public String adminPage(ModelMap model) {
+	public String agentPage(ModelMap model) {
 		model.addAttribute("user", getPrincipal());
 		return "agent/index";
 	}
 
 	@RequestMapping(value = "/admin", method = RequestMethod.GET)
-	public String dbaPage(ModelMap model) {
+	public String adminPage(ModelMap model) {
 		model.addAttribute("user", getPrincipal());
 		return "admin/index";
 	}
